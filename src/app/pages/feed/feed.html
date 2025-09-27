@@ -1,0 +1,39 @@
+<div class="feed-container">
+  <h1>Seu Feed</h1>
+
+  @if (isLoading()) {
+    <p class="loading-message">Carregando o feed...</p>
+  }
+
+  @if (!isLoading() && feedItems().length > 0) {
+    <div class="feed-list">
+      @for (book of feedItems(); track book.id) {
+        <div class="feed-card">
+          <div class="book-info">
+            <img [src]="book.coverImageUrl" [alt]="book.title" class="book-cover">
+            <div class="book-details">
+              <h2>{{ book.title }}</h2>
+              <p class="author">por {{ book.author }} ({{ book.publicationYear }})</p>
+            </div>
+          </div>
+
+          @if (book.comments.length > 0) {
+            <div class="comments-section">
+              <div class="comment">
+                <span class="comment-author">{{ book.comments[0].username }}:</span>
+                <span class="comment-text">"{{ book.comments[0].text }}"</span>
+              </div>
+            </div>
+          } @else {
+            <p class="no-comments">Ainda não há comentários para este livro.</p>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @if (!isLoading() && feedItems().length === 0) {
+    <p class="empty-feed-message">Seu feed está vazio. Siga outros usuários para ver as atividades deles!</p>
+  }
+
+</div>

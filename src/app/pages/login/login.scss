@@ -1,0 +1,64 @@
+// Importa as variáveis para que possamos usá-las neste arquivo
+@use 'variables' as *;
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; // Aumentando o espaçamento
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: $surface-color; // <-- USANDO A VARIÁVEL
+  //border: 1px solid $border-color;   // <-- USANDO A VARIÁVEL
+  min-width: 350px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); // Uma sombra para dar profundidade
+}
+
+h1 {
+  color: $primary-text-color; // <-- USANDO A VARIÁVEL
+  text-align: center;
+  margin-top: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  //color: $secondary-text-color; // <-- USANDO A VARIÁVEL
+  font-size: 0.9rem;
+}
+
+input {
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid $border-color;       // <-- USANDO A VARIÁVEL
+  background-color: $background-color; // <-- USANDO A VARIÁVEL
+  color: $primary-text-color;          // <-- USANDO A VARIÁVEL
+  font-size: 1rem;
+}
+
+.submit-button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: $accent-color-vibrant; // <-- USANDO A VARIÁVEL
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: lighten($accent-color-vibrant, 10%); // Escurece um pouco no hover
+  }
+}

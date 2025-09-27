@@ -1,0 +1,17 @@
+<div class="login-container">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1>Entrar no VibeBooks</h1>
+
+    <div class="form-group">
+      <label for="login">Email ou Nome de Usuário</label>
+      <input type="text" id="login" placeholder="Digite seu email ou usuário" formControlName="login">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" placeholder="Digite sua senha" formControlName="password">
+    </div>
+
+    <button type="submit" class="submit-button" [disabled]="loginForm.invalid">Entrar</button>
+  </form>
+</div>

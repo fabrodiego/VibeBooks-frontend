@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'variables' as *; // Carrega as variáveis globais
+
+/* ESTILOS GLOBAIS */
+body {
+  background-color: $background-color;
+  color: $primary-text-color;
+  margin: 0;
+  font-family: sans-serif; // Definindo uma fonte padrão
+  min-height: 100vh;
+}

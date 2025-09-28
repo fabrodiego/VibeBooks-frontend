@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar';
 import { NebulaBackgroundComponent } from './nebula-background/nebula-background';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NebulaBackgroundComponent], // 2. Adicionar
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    NebulaBackgroundComponent,
+    NavbarComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

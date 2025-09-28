@@ -1,5 +1,12 @@
 @use 'variables' as *;
 
+/* CSS Reset Básico e Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: $background-color;
   color: $primary-text-color;

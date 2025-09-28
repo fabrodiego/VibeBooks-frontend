@@ -8,7 +8,7 @@ import { BookFeedDTO, PageResponseDTO } from '../interfaces/api-dtos';
 })
 export class FeedService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://10.243.96.175:8080/api';
+  private apiUrl = 'http://10.243.96.175:8080/vibebooks/api';
 
   getFeed(page: number, size: number): Observable<PageResponseDTO<BookFeedDTO>> {
     const params = new HttpParams()

@@ -1,10 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface TokenDTO {
-  token: string;
-}
+import { TokenDTO, UserCreateDTO, UserResponseDTO } from '../interfaces/api-dtos';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +12,9 @@ export class AuthService {
 
   login(credentials: any): Observable<TokenDTO> {
     return this.http.post<TokenDTO>(`${this.apiUrl}/login`, credentials);
+  }
+  signup(userData: UserCreateDTO): Observable<UserResponseDTO> {
+    return this.http.post<UserResponseDTO>(`${this.apiUrl}/api/users`, userData);
   }
 }
 

@@ -1,13 +1,13 @@
 @use 'variables' as *;
 
-.login-container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  padding: 2rem 0;
 }
 
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -15,14 +15,20 @@
   border-radius: 8px;
   background-color: $surface-color;
   border: 1px solid $border-color;
-  min-width: 350px;
+  min-width: 380px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
-  color: $primary-text-color;
   text-align: center;
   margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  color: $secondary-text-color;
 }
 
 .form-group {
@@ -39,9 +45,9 @@ label {
 input {
   padding: 0.75rem;
   border-radius: 4px;
-  border: 1px solid $border-color;       // <-- USANDO A VARIÁVEL
-  background-color: $background-color; // <-- USANDO A VARIÁVEL
-  color: $primary-text-color;          // <-- USANDO A VARIÁVEL
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  color: $primary-text-color;
   font-size: 1rem;
 }
 
@@ -62,7 +68,7 @@ input {
   }
 }
 
-.signup-link {
+.login-link {
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.9rem;

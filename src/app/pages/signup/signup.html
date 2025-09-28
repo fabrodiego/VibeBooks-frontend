@@ -1,0 +1,27 @@
+<div class="signup-container">
+  <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <h1>VibeBooks</h1>
+    <p class="subtitle">Junte-se à nossa comunidade de leitores!</p>
+
+    <div class="form-group">
+      <label for="username">Nome de Usuário</label>
+      <input type="text" id="username" placeholder="Escolha um nome de usuário único" formControlName="username">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Digite seu melhor email" formControlName="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" placeholder="Crie uma senha segura" formControlName="rawPassword">
+    </div>
+
+    <button type="submit" class="submit-button" [disabled]="signupForm.invalid">Criar Conta</button>
+
+    <div class="login-link">
+      <p>Já tem uma conta? <a routerLink="/login">Faça o login</a></p>
+    </div>
+  </form>
+</div>

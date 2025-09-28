@@ -24,3 +24,19 @@ export interface PageResponseDTO<T> {
   totalPages: number;
   totalElements: number;
 }
+
+export interface TokenDTO {
+  token: string;
+}
+
+export interface UserCreateDTO {
+  username: string;
+  email: string;
+  rawPassword: string;
+}
+
+export interface UserResponseDTO {
+  id: UUID;
+  username: string;
+  email: string;
+}

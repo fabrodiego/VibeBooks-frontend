@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login {
+export class LoginComponent {
   loginForm: FormGroup;
 
   private fb = inject(FormBuilder);

@@ -1,6 +1,6 @@
 <div class="login-container">
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h1>Entrar no VibeBooks</h1>
+    <h1>VibeBooks</h1>
 
     <div class="form-group">
       <label for="login">Email ou Nome de Usuário</label>
@@ -13,5 +13,8 @@
     </div>
 
     <button type="submit" class="submit-button" [disabled]="loginForm.invalid">Entrar</button>
+    <div class="signup-link">
+      <p>Novo por aqui? <a href="/signup">Faça o cadastro</a></p>
+    </div>
   </form>
 </div>

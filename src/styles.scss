@@ -1,10 +1,9 @@
-@use 'variables' as *; // Carrega as variáveis globais
+@use 'variables' as *;
 
-/* ESTILOS GLOBAIS */
 body {
   background-color: $background-color;
   color: $primary-text-color;
   margin: 0;
-  font-family: sans-serif; // Definindo uma fonte padrão
+  font-family: sans-serif;
   min-height: 100vh;
 }

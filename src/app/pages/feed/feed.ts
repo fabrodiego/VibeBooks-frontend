@@ -10,7 +10,7 @@ import { BookFeedDTO } from '../../interfaces/api-dtos';
   templateUrl: './feed.html',
   styleUrl: './feed.scss'
 })
-export class Feed implements OnInit {
+export class FeedComponent implements OnInit {
   private feedService = inject(FeedService);
 
   feedItems = signal<BookFeedDTO[]>([]);

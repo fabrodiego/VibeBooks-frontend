@@ -1,0 +1,30 @@
+@if (authService.isLoggedIn()) {
+  <nav class="navbar-container">
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/feed" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="fa-solid fa-house"></i>
+          <span class="link-text">Feed</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/search" routerLinkActive="active">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="link-text">Buscar</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/add-book" routerLinkActive="active">
+          <i class="fa-solid fa-plus-square"></i>
+          <span class="link-text">Adicionar Livro</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/profile" routerLinkActive="active">
+          <i class="fa-solid fa-user"></i>
+          <span class="link-text">Perfil</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+}

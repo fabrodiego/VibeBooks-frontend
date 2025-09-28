@@ -1,0 +1,71 @@
+@use 'variables' as *;
+
+.navbar-container {
+  background-color: $surface-color;
+  border-bottom: 1px solid $border-color;
+  padding: 0 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  height: 60px;
+}
+
+li {
+  flex: 1;
+}
+
+a {
+  color: $secondary-text-color;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+
+  &.active, &:hover {
+    color: $primary-text-color;
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+/* ESTILO MOBILE */
+@media (max-width: 768px) {
+  .navbar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid $border-color;
+    border-bottom: none;
+    padding: 0;
+  }
+
+  .nav-links {
+    justify-content: space-around;
+    height: 65px;
+    padding: 0.5rem 0;
+    max-width: 100%;
+  }
+
+  a {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .link-text {
+    display: none;
+  }
+}

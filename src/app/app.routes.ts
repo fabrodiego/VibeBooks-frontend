@@ -3,15 +3,15 @@ import { LoginComponent } from './pages/login/login';
 import { FeedComponent } from './pages/feed/feed';
 import { SignupComponent } from './pages/signup/signup';
 import { authGuard } from './guards/auth-guard';
+import { ProfileComponent } from './pages/profile/profile';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  {
-    path: 'feed',
-    component: FeedComponent,
-    canActivate: [authGuard]
-  },
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'feed', component: FeedComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+
+  { path: '', redirectTo: '/feed', pathMatch: 'full' },
+  { path: '**', redirectTo: '/feed' }
 ];

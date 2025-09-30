@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'sass:color';
 
 .signup-container {
   display: flex;
@@ -64,7 +65,7 @@ input {
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: lighten($accent-color-vibrant, 10%);
+    background-color: color.adjust($accent-color-vibrant, $lightness: 10%);
   }
 }
 

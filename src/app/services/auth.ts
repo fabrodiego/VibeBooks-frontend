@@ -1,4 +1,4 @@
-import { PLATFORM_ID, Injectable, Inject, inject, signal } from '@angular/core';
+import { PLATFORM_ID, Injectable, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -12,7 +12,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   platformId = inject(PLATFORM_ID)
-  private apiUrl = 'http://10.243.96.175:8080/vibebooks/api/auth';
+  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api/auth';
 
   isLoggedIn = signal<boolean>(false);
 

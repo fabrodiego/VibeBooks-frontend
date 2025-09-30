@@ -41,7 +41,7 @@ a {
   }
 }
 
-/* ESTILO MOBILE */
+/* MOBILE */
 @media (max-width: 768px) {
   .navbar-container {
     position: fixed;
@@ -55,7 +55,7 @@ a {
 
   .nav-links {
     justify-content: space-around;
-    height: 65px;
+    height: 55px;
     padding: 0.5rem 0;
     max-width: 100%;
   }
@@ -63,6 +63,9 @@ a {
   a {
     flex-direction: column;
     gap: 0.2rem;
+    i {
+      font-size: 1.40rem;
+    }
   }
 
   .link-text {

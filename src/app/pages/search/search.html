@@ -1,0 +1,33 @@
+<div class="search-container">
+  <h1>Busque por Livros</h1>
+  <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input
+      type="text"
+      placeholder="Digite o título do livro..."
+      class="search-input"
+      [formControl]="searchInput"
+    />
+  </div>
+
+  <div class="results-container">
+    @if (isLoading()) {
+      <p class="info-message">A buscar...</p>
+    }
+
+    @if (!isLoading() && searchResults().length > 0) {
+      <div class="results-grid">
+        @for (book of searchResults(); track book.id) {
+          <div class="book-card" (click)="openBookDetails(book.id)">
+            <img [ngSrc]="book.coverImageUrl" [alt]="book.title" class="book-cover" width="150" height="225">
+            <div class="book-title">{{ book.title }}</div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (!isLoading() && searchResults().length === 0 && hasSearched()) {
+      <p class="info-message">Nenhum livro encontrado para a sua busca.</p>
+    }
+  </div>
+</div>

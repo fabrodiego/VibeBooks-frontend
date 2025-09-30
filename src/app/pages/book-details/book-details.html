@@ -1,0 +1,45 @@
+<h2 mat-dialog-title><strong>{{ book()?.title || 'A carregar...' }}</strong></h2>
+
+<mat-dialog-content class="mat-typography">
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    @if (book(); as b) {
+      <div class="details-container header-details">
+        <img [ngSrc]="b.coverImageUrl" [alt]="b.title" class="book-cover" width="150" height="225">
+        <div class="book-text">
+          <h3><strong>por {{ b.author }}</strong></h3>
+          <p><strong>Ano de Publicação:</strong> {{ b.publicationYear }}</p>
+          <p><strong>ISBN:</strong> {{ b.isbn }}</p>
+        </div>
+      </div>
+    }
+
+    <mat-tab-group>
+      <mat-tab label="Detalhes">
+        <div class="tab-content">
+          <p>Aqui no futuro podemos colocar a sinopse do livro.</p>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Comentários ({{ comments().length }})">
+        <div class="tab-content">
+          @for (comment of comments(); track comment.id) {
+            <div class="comment">
+              <strong class="comment-author">{{ comment.username }}:</strong>
+              <span class="comment-text">"{{ comment.text }}"</span>
+            </div>
+          } @empty {
+            <p>Ainda não há comentários. Seja o primeiro a partilhar a sua vibe!</p>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>

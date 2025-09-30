@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+// --- Estilos Gerais para o Conteúdo do Modal ---
+.details-container, .tab-content {
+  color: $secondary-text-color; // Força todo o texto dentro destas áreas a ser branco
+}
+
+.details-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.header-details {
+  margin-bottom: 1.5rem;
+}
+
+.book-cover {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.book-text {
+  h3 {
+    margin-top: 0;
+    font-weight: normal;
+    color: $secondary-text-color;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    color: $secondary-text-color;
+
+    strong {
+      color: $secondary-text-color;
+    }
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+// --- Estilos para as Abas e Comentários ---
+
+.tab-content {
+  padding: 1.5rem 0.5rem;
+}
+
+.comment {
+  border-bottom: 1px solid $secondary-text-color;
+  padding: 1rem 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.comment-author {
+  font-weight: bold;
+  color: $secondary-text-color;
+  margin-right: 0.5rem;
+}
+
+.comment-text {
+  // A cor do texto do comentário agora será a branca, definida acima
+}

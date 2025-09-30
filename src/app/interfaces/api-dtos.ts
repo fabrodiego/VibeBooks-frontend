@@ -9,6 +9,15 @@ export interface CommentDetailsDTO {
   bookTitle: string;
 }
 
+export interface BookDetailsDTO {
+  id: UUID;
+  title: string;
+  author: string;
+  isbn: string;
+  publicationYear: number;
+  coverImageUrl: string;
+}
+
 export interface BookFeedDTO {
   id: UUID;
   title: string;

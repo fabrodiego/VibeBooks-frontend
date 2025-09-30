@@ -1,16 +1,48 @@
 @use 'variables' as *;
 
-/* CSS Reset Básico e Box Sizing */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $background-color;
   color: $primary-text-color;
-  margin: 0;
-  font-family: sans-serif;
-  min-height: 100vh;
+}
+
+/* ======================================= */
+/*             ANGULAR MATERIAL            */
+/* ======================================= */
+
+.mat-mdc-dialog-surface {
+  background-color: $background-color !important;
+}
+
+.mat-mdc-dialog-title {
+  color: $secondary-text-color !important;
+}
+
+.mat-mdc-tab-body-content {
+  overflow: hidden !important;
+}
+
+.mat-mdc-tab-header .mdc-tab .mdc-tab__text-label {
+  color: $secondary-text-color !important;
+  opacity: 0.7;
+}
+
+.mat-mdc-tab-header .mdc-tab--active .mdc-tab__text-label {
+  color: $primary-text-color !important;
+  opacity: 1;
+}
+
+.mat-mdc-tab-header .mat-mdc-tab-indicator__content--underline {
+  border-color: $accent-color-vibrant !important;
 }

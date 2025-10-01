@@ -1,0 +1,17 @@
+<div class="form-container">
+  <form class="book-form" [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+    <h1>Adicionar Novo Livro</h1>
+    <p class="subtitle">Basta inserir o ISBN de 10 ou 13 dígitos do livro. Nós cuidamos do resto!</p>
+
+    <div class="form-group">
+      <label for="isbn">ISBN</label>
+      <input type="text" id="isbn" placeholder="Ex: 9788535914846" formControlName="isbn">
+    </div>
+
+    @if (errorMessage()) {
+      <div class="message error">{{ errorMessage() }}</div>
+    }
+
+    <button type="submit" class="submit-button" [disabled]="addBookForm.invalid">Adicionar Livro</button>
+  </form>
+</div>

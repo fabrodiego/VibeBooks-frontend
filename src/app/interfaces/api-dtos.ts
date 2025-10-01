@@ -49,3 +49,7 @@ export interface UserResponseDTO {
   username: string;
   email: string;
 }
+
+export interface BookIsbnDTO {
+  isbn: string;
+}

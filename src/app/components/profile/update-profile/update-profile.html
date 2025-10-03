@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Atualizar Dados Pessoais</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  @if (isLoading()) {
+    <div class="spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  } @else {
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="update-form">
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nome de Utilizador</mat-label>
+        <input matInput formControlName="username" placeholder="Seu nome de utilizador">
+        @if (updateForm.get('username')?.invalid && updateForm.get('username')?.touched) {
+          <mat-error>O nome de utilizador deve ter pelo menos 3 caracteres.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Seu endereço de email">
+        @if (updateForm.get('email')?.invalid && updateForm.get('email')?.touched) {
+          <mat-error>Por favor, insira um formato de email válido.</mat-error>
+        }
+      </mat-form-field>
+
+    </form>
+  }
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="updateForm.invalid || isLoading()">Salvar Alterações</button>
+</mat-dialog-actions>

@@ -53,3 +53,8 @@ export interface UserResponseDTO {
 export interface BookIsbnDTO {
   isbn: string;
 }
+
+export interface UserUpdateDTO {
+  username?: string;
+  email?: string;
+}

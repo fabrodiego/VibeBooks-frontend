@@ -31,7 +31,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src"
+                "src",
+                "node_modules"
               ]
             },
             "server": "src/main.server.ts",

@@ -1,10 +1,10 @@
-import {Component, OnInit, inject, signal} from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { UserService } from '../../../services/user';
 import { UserResponseDTO } from '../../../interfaces/api-dtos';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,13 +14,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'app-update-profile',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatDialogModule
+    CommonModule, ReactiveFormsModule, MatFormFieldModule,
+    MatInputModule, MatButtonModule, MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   templateUrl: './update-profile.html',
   styleUrl: './update-profile.scss'
@@ -32,23 +28,32 @@ export class UpdateProfileComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
-  private dialogRef = inject(MatDialogRef<UpdateProfileComponent>);
+  private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   constructor() {
     this.updateForm = this.fb.group({
       username: ['', [Validators.minLength(3)]],
-      email: ['', [Validators.email]]
+      email: ['', [Validators.email]],
+      bio: ['', [Validators.maxLength(255)]]
     });
   }
 
   ngOnInit(): void {
-    this.userService.getMe().subscribe((user: UserResponseDTO) => {
-      this.currentUser.set(user);
-      this.updateForm.patchValue({
-        username: user.username,
-        email: user.email
-      });
-      this.isLoading.set(false);
+    this.userService.getMe().subscribe({
+      next: (user: UserResponseDTO) => {
+        this.currentUser.set(user);
+        this.updateForm.patchValue({
+          username: user.username,
+          email: user.email,
+          bio: user.bio
+        });
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error("Failed to load user data for profile form", err);
+        this.isLoading.set(false);
+      }
     });
   }
 
@@ -56,18 +61,38 @@ export class UpdateProfileComponent implements OnInit {
     if (this.updateForm.invalid || !this.currentUser()) {
       return;
     }
-
     const userId = this.currentUser()!.id;
-    const formData = this.updateForm.value;
+    const changedData = this.getChangedFields();
 
-    this.userService.updateUser(userId, formData).subscribe({
+    if (Object.keys(changedData).length === 0) {
+      this.router.navigate(['/profile/home']);
+      return;
+    }
+
+    this.userService.updateUser(userId, changedData).subscribe({
       next: (updatedUser) => {
-        console.log('Perfil atualizado com sucesso!', updatedUser);
-        this.dialogRef.close(true);
+        this.snackBar.open('Perfil atualizado com sucesso!', 'Fechar', { duration: 3000 });
+        this.router.navigate(['/profile/home']);
       },
       error: (err) => {
-        console.error('Falha ao atualizar o perfil', err);
+        this.snackBar.open('Erro ao atualizar o perfil.', 'Fechar', { duration: 3000 });
       }
     });
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/profile/home']);
+  }
+
+  private getChangedFields(): any {
+    const changedFields: any = {};
+    const controls = this.updateForm.controls;
+
+    for (const key in controls) {
+      if (controls.hasOwnProperty(key) && controls[key].dirty) {
+        changedFields[key] = controls[key].value;
+      }
+    }
+    return changedFields;
   }
 }

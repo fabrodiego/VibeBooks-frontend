@@ -6,6 +6,10 @@ import { authGuard } from './guards/auth-guard';
 import { ProfileComponent } from './pages/profile/profile';
 import { AddBookComponent } from './pages/add-book/add-book';
 import { SearchComponent } from './pages/search/search';
+import { ProfileHomeComponent } from './components/profile/profile-home/profile-home';
+import { UpdateProfileComponent } from './components/profile/update-profile/update-profile';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password';
+import { ThemeSettingsComponent } from './components/profile/theme-settings/theme-settings';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +19,19 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'add-book', component: AddBookComponent, canActivate: [authGuard] },
   { path: 'search', component: SearchComponent, canActivate: [authGuard] },
+
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: ProfileHomeComponent },
+      { path: 'personal-data', component: UpdateProfileComponent },
+      { path: 'security', component: ChangePasswordComponent },
+      { path: 'theme', component: ThemeSettingsComponent },
+    ]
+  },
 
   { path: '', redirectTo: '/feed', pathMatch: 'full' },
   { path: '**', redirectTo: '/feed' }

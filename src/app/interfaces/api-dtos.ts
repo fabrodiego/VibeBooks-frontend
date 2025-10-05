@@ -48,13 +48,15 @@ export interface UserResponseDTO {
   id: UUID;
   username: string;
   email: string;
-}
-
-export interface BookIsbnDTO {
-  isbn: string;
+  bio?: string;
 }
 
 export interface UserUpdateDTO {
   username?: string;
   email?: string;
+  bio?: string;
+}
+
+export interface BookIsbnDTO {
+  isbn: string;
 }

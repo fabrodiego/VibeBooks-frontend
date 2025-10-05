@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProfileComponent } from '../../components/profile/update-profile/update-profile';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

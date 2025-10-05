@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Atualizar Dados Pessoais</h2>
-
-<mat-dialog-content class="mat-typography">
+<div class="form-wrapper">
+  <h1>Atualizar Dados Pessoais</h1>
+  <p class="subtitle">Altere as suas informações de perfil. As alterações podem levar algum tempo para serem refletidas em toda a plataforma.</p>
 
   @if (isLoading()) {
     <div class="spinner-container">
@@ -11,26 +11,27 @@
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Nome de Utilizador</mat-label>
-        <input matInput formControlName="username" placeholder="Seu nome de utilizador">
-        @if (updateForm.get('username')?.invalid && updateForm.get('username')?.touched) {
-          <mat-error>O nome de utilizador deve ter pelo menos 3 caracteres.</mat-error>
-        }
+        <input matInput formControlName="username">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="Seu endereço de email">
-        @if (updateForm.get('email')?.invalid && updateForm.get('email')?.touched) {
-          <mat-error>Por favor, insira um formato de email válido.</mat-error>
-        }
+        <input matInput formControlName="email">
       </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Bio</mat-label>
+        <textarea matInput formControlName="bio" placeholder="Fale um pouco sobre si..." maxlength="255" rows="4"></textarea>
+        <mat-hint align="end">{{ updateForm.get('bio')?.value?.length || 0 }} / 255</mat-hint>
+      </mat-form-field>
+
+      <div class="actions">
+        <button type="button" class="btn-stroked-warn" (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="btn-primary" [disabled]="updateForm.invalid || !updateForm.dirty || isLoading()">
+          Salvar Alterações
+        </button>
+      </div>
 
     </form>
   }
-
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="updateForm.invalid || isLoading()">Salvar Alterações</button>
-</mat-dialog-actions>
+</div>

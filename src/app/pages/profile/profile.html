@@ -1,34 +1,28 @@
-<div class="profile-container">
-  <h1>Minha Conta</h1>
-  <p class="subtitle">Gira as suas informações de perfil, segurança e preferências.</p>
-
-  <div class="settings-menu">
-    <div class="menu-item" (click)="openUpdateProfileDialog()">
-      <i class="fa-solid fa-user-pen"></i>
-      <div class="menu-text">
-        <h2>Dados Pessoais</h2>
-        <p>Atualize o seu nome de utilizador e email.</p>
-      </div>
+<div class="profile-layout">
+  <nav class="sidebar">
+    <div class="nav-group">
+      <h3 class="nav-header">CONFIGURAÇÕES DE UTILIZADOR</h3>
+      <ul>
+        <li>
+          <a routerLink="personal-data" routerLinkActive="active">Dados Pessoais</a>
+        </li>
+        <li>
+          <a routerLink="security" routerLinkActive="active">Senha e Segurança</a>
+        </li>
+        <li>
+          <a routerLink="theme" routerLinkActive="active">Tema</a>
+        </li>
+      </ul>
     </div>
-
-    <div class="menu-item">
-      <i class="fa-solid fa-shield-halved"></i>
-      <div class="menu-text">
-        <h2>Senha e Segurança</h2>
-        <p>Altere a sua senha.</p>
-      </div>
+    <div class="nav-group">
+      <button (click)="logout()" class="btn-stroked-warn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair
+      </button>
     </div>
+  </nav>
 
-    <div class="menu-item">
-      <i class="fa-solid fa-palette"></i>
-      <div class="menu-text">
-        <h2>Tema</h2>
-        <p>Escolha entre os temas claro e escuro.</p>
-      </div>
-    </div>
-  </div>
-
-  <button (click)="logout()" class="logout-button">
-    Sair da Conta
-  </button>
+  <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
 </div>

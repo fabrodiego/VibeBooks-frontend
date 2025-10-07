@@ -23,6 +23,13 @@
   </nav>
 
   <main class="content-area">
-    <router-outlet></router-outlet>
+    <router-outlet #outlet="outlet"></router-outlet>
+
+    @if (!outlet.isActivated) {
+      <div class="welcome-container">
+        <h1 class="main-title">VibeBooks</h1>
+        <p class="subtitle">Minha Conta</p>
+      </div>
+    }
   </main>
 </div>

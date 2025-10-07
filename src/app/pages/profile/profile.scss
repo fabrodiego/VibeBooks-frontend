@@ -1,14 +1,12 @@
 @use 'variables' as *;
 @use 'sass:color';
 
-@use 'variables' as *;
-
 .profile-layout {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   max-width: 1000px;
-  margin: 3rem auto;
-  padding: 0 2rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
   min-height: 80vh;
 }
 
@@ -60,7 +58,7 @@ a {
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &.active {
-    background-color: $surface-color;
+    background-color: color.adjust($surface-color, $lightness: 10%);
     color: $primary-text-color;
   }
 
@@ -78,7 +76,7 @@ a {
   padding: 0.6rem 0.75rem;
   border: 1px solid #c94040;
   border-radius: 4px;
-  background-color: transparent;
+  background-color: $surface-color;
   color: #c94040;
   font-weight: bold;
   font-size: 0.9rem;
@@ -92,6 +90,49 @@ a {
   }
 }
 
-.logout-btn-custom {
+.content-area {
+  flex: 1;
   background-color: $surface-color;
+  border-radius: 8px;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: $primary-text-color;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: $secondary-text-color;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 768px) {
+  .profile-layout {
+    flex-direction: column;
+    margin: 1rem auto;
+    padding: 0 0.5rem;
+  }
+
+  .sidebar {
+    flex: 1;
+  }
+
+  .content-area {
+    min-height: 300px;
+  }
 }

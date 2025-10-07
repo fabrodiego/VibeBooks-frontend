@@ -27,6 +27,7 @@
               }
             ],
             "styles": [
+              "src/_theme.scss",
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {

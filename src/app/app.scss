@@ -1,0 +1,21 @@
+.app-layout {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.main-content {
+  overflow-y: auto;
+}
+
+@media (min-width: 769px) {
+  .app-layout {
+    grid-template-rows: auto 1fr;
+  }
+
+  app-navbar {
+    order: -1;
+  }
+}

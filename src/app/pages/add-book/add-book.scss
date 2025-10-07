@@ -1,6 +1,6 @@
 @use 'variables' as *;
+@use 'sass:color';
 
-// Usamos as mesmas classes do signup/login para garantir consistência
 .form-container {
   display: flex;
   justify-content: center;
@@ -46,7 +46,6 @@ label {
   font-size: 0.9rem;
 }
 
-// Estilo padrão para o input, igual ao do login/signup
 input {
   padding: 0.75rem;
   border-radius: 4px;
@@ -61,7 +60,6 @@ input {
   }
 }
 
-// Estilo padrão para o botão
 .submit-button {
   padding: 0.75rem;
   border: none;
@@ -75,17 +73,15 @@ input {
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: lighten($accent-color-vibrant, 10%);
+    background-color: color.adjust($accent-color-vibrant, $lightness: 10%);
   }
 
-  // Estilo para o botão quando está desabilitado (formulário inválido)
   &:disabled {
-    background-color: #5c5c5c; // Um cinza escuro
+    background-color: #5c5c5c;
     cursor: not-allowed;
   }
 }
 
-// Estilos para as mensagens de feedback
 .message {
   padding: 1rem;
   border-radius: 4px;
@@ -95,13 +91,13 @@ input {
 }
 
 .success {
-  background-color: #28a74530; // Fundo verde com transparência
+  background-color: #28a74530;
   color: #28a745;
   border: 1px solid #28a745;
 }
 
 .error {
-  background-color: #dc354530; // Fundo vermelho com transparência
+  background-color: #dc354530;
   color: #dc3545;
   border: 1px solid #dc3545;
 }

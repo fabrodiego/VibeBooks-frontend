@@ -44,10 +44,6 @@ a {
 /* MOBILE */
 @media (max-width: 768px) {
   .navbar-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     border-top: 1px solid $border-color;
     border-bottom: none;
     padding: 0;
@@ -55,7 +51,7 @@ a {
 
   .nav-links {
     justify-content: space-around;
-    height: 55px;
+    height: 65px;
     padding: 0.5rem 0;
     max-width: 100%;
   }

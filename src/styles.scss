@@ -1,4 +1,5 @@
-@use 'variables' as *;
+@use 'variables' as v;
+@use 'sass:color';
 
 *,
 *::before,
@@ -13,36 +14,53 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: $background-color;
-  color: $primary-text-color;
+  background-color: v.$background-color;
+  color: v.$primary-text-color;
 }
 
-/* ======================================= */
-/*             ANGULAR MATERIAL            */
-/* ======================================= */
+.btn-primary {
+  -webkit-appearance: none;
+  appearance: none;
 
-.mat-mdc-dialog-surface {
-  background-color: $background-color !important;
+  background-color: v.$accent-color-vibrant !important;
+  color: white !important;
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 4px !important;
+  border: none !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease-in-out !important;
+  line-height: normal !important;
+
+  &:hover {
+    background-color: color.adjust(v.$accent-color-vibrant, $lightness: 10%) !important;
+  }
+
+  &:disabled {
+    background-color: #5c5c5c !important;
+    color: #9e9e9e !important;
+    cursor: not-allowed !important;
+  }
 }
 
-.mat-mdc-dialog-title {
-  color: $secondary-text-color !important;
-}
+.btn-stroked-warn {
+  -webkit-appearance: none;
+  appearance: none;
 
-.mat-mdc-tab-body-content {
-  overflow: hidden !important;
-}
+  padding: 0.6rem 1.2rem !important;
+  border: 1px solid #c94040 !important;
+  border-radius: 4px !important;
+  background-color: transparent !important;
+  color: #c94040 !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease-in-out !important;
+  line-height: normal !important;
 
-.mat-mdc-tab-header .mdc-tab .mdc-tab__text-label {
-  color: $secondary-text-color !important;
-  opacity: 0.7;
-}
-
-.mat-mdc-tab-header .mdc-tab--active .mdc-tab__text-label {
-  color: $primary-text-color !important;
-  opacity: 1;
-}
-
-.mat-mdc-tab-header .mat-mdc-tab-indicator__content--underline {
-  border-color: $accent-color-vibrant !important;
+  &:hover {
+    background-color: #c94040 !important;
+    color: white !important;
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { UserService } from '../../../services/user';
 import { UserResponseDTO } from '../../../interfaces/api-dtos';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [
     CommonModule, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule, RouterLink
   ],
   templateUrl: './update-profile.html',
   styleUrl: './update-profile.scss'

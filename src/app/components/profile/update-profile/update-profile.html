@@ -1,7 +1,13 @@
-<div class="form-wrapper">
+<div class="page-header">
+  <a routerLink="/profile" class="back-button">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Voltar</span>
+  </a>
   <h1>Atualizar Dados Pessoais</h1>
-  <p class="subtitle">Altere as suas informações de perfil. As alterações podem levar algum tempo para serem refletidas em toda a plataforma.</p>
+  <p class="subtitle">Altere as suas informações de perfil.</p>
+</div>
 
+<div class="form-wrapper">
   @if (isLoading()) {
     <div class="spinner-container">
       <mat-spinner diameter="50"></mat-spinner>

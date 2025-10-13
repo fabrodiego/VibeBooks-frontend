@@ -1,16 +1,16 @@
-/* ======================================= */
-/* VIBEBOOKS - PALETA DE CORES     */
-/* ======================================= */
+/* ========================== */
+/* VIBEBOOKS - COLOR PALETTE  */
+/* ========================== */
 
-// Cores Base (Tema Escuro "Nebula")
-$background-color: #151515;       // Um preto um pouco mais suave para o fundo principal
-$surface-color: #212121;        // O seu "preto carbono" para painéis, cards, formulários
-$border-color: #ffffff;         // Uma borda sutil um pouco mais clara que a superfície
+// Base
+$background-color: #151515;
+$surface-color: #212121;
+$border-color: rgba(255, 255, 255, 0.1);
 
-// Cores de Texto
-$primary-text-color: #ffffff;   // Um branco suave para títulos e textos principais
-$secondary-text-color: #797979; // Um cinza claro para textos de apoio (como labels)
+// Text
+$primary-text-color: #ffffff;
+$secondary-text-color: #797979;
 
-// Cores de Destaque (Acento)
-$accent-color: #000080;         // Seu azul marinho, ótimo para detalhes
-$accent-color-vibrant: #0634BDFF; // Um azul mais vibrante para botões e links, o "brilho da nébula"
+// Highlight Colors
+$accent-color: #000080;
+$accent-color-vibrant: #0634BDFF;

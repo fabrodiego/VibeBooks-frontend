@@ -1,35 +1,26 @@
-<div class="profile-layout">
-  <nav class="sidebar">
+<div class="profile-layout" [class.child-active]="outlet.isActivated">
+  <div class="sidebar">
     <div class="nav-group">
       <h3 class="nav-header">CONFIGURAÇÕES DE UTILIZADOR</h3>
       <ul>
-        <li>
-          <a routerLink="personal-data" routerLinkActive="active">Dados Pessoais</a>
-        </li>
-        <li>
-          <a routerLink="security" routerLinkActive="active">Senha e Segurança</a>
-        </li>
-        <li>
-          <a routerLink="theme" routerLinkActive="active">Tema</a>
-        </li>
+        <li><a routerLink="personal-data" routerLinkActive="active">Dados Pessoais</a></li>
+        <li><a routerLink="security" routerLinkActive="active">Senha e Segurança</a></li>
+        <li><a routerLink="theme" routerLinkActive="active">Tema</a></li>
       </ul>
     </div>
-    <div class="nav-group">
+    <div class="logout-group">
       <button (click)="logout()" class="btn-stroked-warn">
         <i class="fa-solid fa-right-from-bracket"></i>
         Sair
       </button>
     </div>
-  </nav>
+  </div>
 
   <main class="content-area">
+    <div *ngIf="!outlet.isActivated" class="welcome-container">
+      <h1 class="main-title">VibeBooks</h1>
+      <p class="subtitle">Minha Conta</p>
+    </div>
     <router-outlet #outlet="outlet"></router-outlet>
-
-    @if (!outlet.isActivated) {
-      <div class="welcome-container">
-        <h1 class="main-title">VibeBooks</h1>
-        <p class="subtitle">Minha Conta</p>
-      </div>
-    }
   </main>
 </div>

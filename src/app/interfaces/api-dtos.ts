@@ -60,3 +60,8 @@ export interface UserUpdateDTO {
 export interface BookIsbnDTO {
   isbn: string;
 }
+
+export interface PasswordChangeDTO {
+  oldPassword: string;
+  newPassword: string;
+}

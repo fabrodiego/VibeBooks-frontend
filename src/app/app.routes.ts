@@ -7,7 +7,7 @@ import { ProfileComponent } from './pages/profile/profile';
 import { AddBookComponent } from './pages/add-book/add-book';
 import { SearchComponent } from './pages/search/search';
 import { UpdateProfileComponent } from './components/profile/update-profile/update-profile';
-import { ChangePasswordComponent } from './components/profile/change-password/change-password';
+import { ChangePasswordComponent } from './components/profile/password-security/change-password/change-password';
 import { ThemeSettingsComponent } from './components/profile/theme-settings/theme-settings';
 
 export const routes: Routes = [

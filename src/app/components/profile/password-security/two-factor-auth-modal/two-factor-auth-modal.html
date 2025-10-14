@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Ativar Autenticação de Dois Fatores (2FA)</h1>
+<div mat-dialog-content>
+  <p>Escolha o método de verificação para proteger a sua conta.</p>
+  <div class="options-container">
+    <button mat-stroked-button (click)="onConfigure('email')">
+      <mat-icon>email</mat-icon>
+      Configurar via Email
+    </button>
+    <button mat-stroked-button (click)="onConfigure('phone')">
+      <mat-icon>phone</mat-icon>
+      Configurar via Telefone
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button [mat-dialog-close]="true">Cancelar</button>
+</div>

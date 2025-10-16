@@ -7,7 +7,7 @@
 }
 
 h1 {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 1rem;
   margin: 0 0 2rem;
 }
@@ -19,10 +19,10 @@ h1 {
 }
 
 .feed-card {
-  background-color: $surface-color;
+  background-color: var(--surface-color);
   border-radius: 8px;
   padding: 1.5rem;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -42,12 +42,12 @@ h1 {
 .book-details {
   h2 {
     margin: 0 0 0.25rem 0;
-    color: $primary-text-color;
+    color: var(--primary-text-color);
     font-size: 1.25rem;
   }
   .author {
     margin: 0;
-    color: $secondary-text-color;
+    color: var(--secondary-text-color);
     font-size: 0.9rem;
   }
 }
@@ -55,17 +55,17 @@ h1 {
 .comments-section {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
   font-style: italic;
 
   .comment-author {
     font-weight: bold;
-    color: $primary-text-color;
+    color: var(--primary-text-color);
   }
 }
 
 .loading-message, .empty-feed-message, .no-comments {
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   text-align: center;
   padding: 2rem;
 }

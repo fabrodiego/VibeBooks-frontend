@@ -1,8 +1,7 @@
 @use 'variables' as *;
 
-// --- Estilos Gerais para o Conteúdo do Modal ---
 .details-container, .tab-content {
-  color: $secondary-text-color; // Força todo o texto dentro destas áreas a ser branco
+  color: var(--secondary-text-color);
 }
 
 .details-container {
@@ -27,15 +26,15 @@
   h3 {
     margin-top: 0;
     font-weight: normal;
-    color: $secondary-text-color;
+    color: var(--secondary-text-color);
   }
 
   p {
     margin-bottom: 0.5rem;
-    color: $secondary-text-color;
+    color: var(--secondary-text-color);
 
     strong {
-      color: $secondary-text-color;
+      color: var(--secondary-text-color);
     }
   }
 }
@@ -47,14 +46,13 @@
   min-height: 200px;
 }
 
-// --- Estilos para as Abas e Comentários ---
 
 .tab-content {
   padding: 1.5rem 0.5rem;
 }
 
 .comment {
-  border-bottom: 1px solid $secondary-text-color;
+  border-bottom: 1px solid var(--secondary-text-color);
   padding: 1rem 0;
 
   &:last-child {
@@ -64,10 +62,10 @@
 
 .comment-author {
   font-weight: bold;
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   margin-right: 0.5rem;
 }
 
 .comment-text {
-  // A cor do texto do comentário agora será a branca, definida acima
+  color: var(--primary-text-color);
 }

@@ -2,15 +2,38 @@
 /* VIBEBOOKS - COLOR PALETTE  */
 /* ========================== */
 
-// Base
-$background-color: #151515;
-$surface-color: #212121;
-$border-color: rgba(255, 255, 255, 0.1);
+// --- DARK THEME (DEFAULT) ---
+@mixin dark-theme {
+  --background-color: #151515;
+  --surface-color: #212121;
+  --border-color: rgba(255, 255, 255, 0.1);
 
-// Text
-$primary-text-color: #ffffff;
-$secondary-text-color: #797979;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #797979;
 
-// Highlight Colors
-$accent-color: #000080;
-$accent-color-vibrant: #0634BDFF;
+  --accent-color: #000080;
+  --accent-color-vibrant: #0634BDFF;
+
+  --particle-opacity: 1;
+
+  --active-selection-color: rgba(255, 255, 255, 0.1);
+  --hover-selection-color: rgba(255, 255, 255, 0.05);
+}
+
+// --- LIGHT THEME ---
+@mixin light-theme {
+  --background-color: #FFFFFF;
+  --surface-color: #eaeaea;
+  --border-color: rgba(0, 0, 0, 0.1);
+
+  --primary-text-color: #1A1A1A;
+  --secondary-text-color: #6B7280;
+
+  --accent-color: #000080;
+  --accent-color-vibrant: #0634BDFF;
+
+  --particle-opacity: 0.7;
+
+  --active-selection-color: rgba(0, 0, 0, 0.08);
+  --hover-selection-color: rgba(0, 0, 0, 0.04);
+}

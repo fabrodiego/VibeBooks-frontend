@@ -49,12 +49,16 @@ export class NebulaBackgroundComponent implements AfterViewInit, OnDestroy {
   private particles: Particle[] = [];
   private animationFrameId?: number;
 
-  constructor(private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const canvasEl = this.canvasRef.nativeElement;
       this.ctx = canvasEl.getContext('2d')!;
+
       this.resizeCanvas();
       this.initParticles();
       this.ngZone.runOutsideAngular(() => this.animate());
@@ -69,8 +73,10 @@ export class NebulaBackgroundComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onResize(): void {
-    this.resizeCanvas();
-    this.initParticles();
+    if (isPlatformBrowser(this.platformId)) {
+      this.resizeCanvas();
+      this.initParticles();
+    }
   }
 
   private resizeCanvas(): void {
@@ -89,12 +95,10 @@ export class NebulaBackgroundComponent implements AfterViewInit, OnDestroy {
 
   private animate = (): void => {
     this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
-
     this.particles.forEach(p => {
       p.update();
       p.draw(this.ctx);
     });
-
     this.animationFrameId = requestAnimationFrame(this.animate);
   }
 }

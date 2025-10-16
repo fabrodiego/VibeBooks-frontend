@@ -13,14 +13,14 @@
   gap: 1.5rem;
   padding: 2rem;
   border-radius: 8px;
-  background-color: $surface-color;
-  border: 1px solid $border-color;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
   min-width: 350px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
-  color: $primary-text-color;
+  color: var(--primary-text-color);
   text-align: center;
   margin-top: 0;
 }
@@ -32,16 +32,16 @@ h1 {
 }
 
 label {
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   font-size: 0.9rem;
 }
 
 input {
   padding: 0.75rem;
   border-radius: 4px;
-  border: 1px solid $border-color;
-  background-color: $background-color;
-  color: $primary-text-color;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
   font-size: 1rem;
 }
 
@@ -49,10 +49,10 @@ input {
   text-align: center;
   margin-top: 1.5rem;
   font-size: 0.9rem;
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
 
   a {
-    color: $accent-color-vibrant;
+    color: var(--accent-color-vibrant);
     text-decoration: none;
     font-weight: bold;
 

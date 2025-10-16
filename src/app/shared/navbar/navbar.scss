@@ -1,8 +1,14 @@
 @use 'variables' as *;
 
+:host {
+  background-color: var(--surface-color);
+  color: var(--primary-text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
 .navbar-container {
-  background-color: $surface-color;
-  border-bottom: 1px solid $border-color;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 0 2rem;
 }
 
@@ -22,7 +28,7 @@ li {
 }
 
 a {
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -33,7 +39,7 @@ a {
   cursor: pointer;
 
   &.active, &:hover {
-    color: $primary-text-color;
+    color: var(--primary-text-color);
   }
 
   i {
@@ -44,7 +50,7 @@ a {
 /* MOBILE */
 @media (max-width: 768px) {
   .navbar-container {
-    border-top: 1px solid $border-color;
+    border-top: 1px solid var(--border-color);
     border-bottom: none;
     padding: 0;
   }

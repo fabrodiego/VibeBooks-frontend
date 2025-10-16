@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ThemeSettingsComponent } from './theme-settings';
 
-describe('ThemeSettings', () => {
+describe('ThemeSettingsComponent', () => {
   let component: ThemeSettingsComponent;
   let fixture: ComponentFixture<ThemeSettingsComponent>;
 
@@ -10,7 +9,7 @@ describe('ThemeSettings', () => {
     await TestBed.configureTestingModule({
       imports: [ThemeSettingsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ThemeSettingsComponent);
     component = fixture.componentInstance;

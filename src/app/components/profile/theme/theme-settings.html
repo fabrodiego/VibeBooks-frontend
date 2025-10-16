@@ -1,0 +1,20 @@
+<div class="page-header">
+  <a routerLink="/profile" class="back-button">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Voltar</span>
+  </a>
+  <h1>Tema</h1>
+  <p class="subtitle">Personalize a aparência do VibeBooks.</p>
+</div>
+
+<div class="theme-options">
+  <button (click)="changeTheme('light')" [class.active]="currentTheme() === 'light'">
+    <i class="fa-solid fa-sun"></i>
+    <span>Claro</span>
+  </button>
+
+  <button (click)="changeTheme('dark')" [class.active]="currentTheme() === 'dark'">
+    <i class="fa-solid fa-moon"></i>
+    <span>Escuro</span>
+  </button>
+</div>

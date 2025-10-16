@@ -1,13 +1,14 @@
 @use '@angular/material' as mat;
-@use 'variables' as v;
 @use 'sass:color';
 
 @include mat.core();
 
+$accent-color-vibrant: #0634BDFF;
+
 $vibebooks-custom-blue-palette: (
-  500: v.$accent-color-vibrant,
-  100: color.adjust(v.$accent-color-vibrant, $lightness: 30%),
-  700: color.adjust(v.$accent-color-vibrant, $lightness: 10%),
+  500: $accent-color-vibrant,
+  100: color.adjust($accent-color-vibrant, $lightness: 30%),
+  700: color.adjust($accent-color-vibrant, $lightness: -10%),
   contrast: (
     500: white,
     100: black,
@@ -27,9 +28,10 @@ $vibebooks-dark-theme: mat.m2-define-dark-theme((
   )
 ));
 
-@include mat.all-component-themes($vibebooks-dark-theme);
-
-body {
-  background-color: v.$background-color;
-  color: v.$primary-text-color;
-}
+$vibebooks-light-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $vibebooks-primary-palette,
+    accent: $vibebooks-accent-palette,
+    warn: $vibebooks-warn-palette,
+  )
+));

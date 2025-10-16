@@ -29,7 +29,7 @@
 }
 
 .back-button {
-  color: $primary-text-color;
+  color: var(--primary-text-color);
   text-decoration: none;
   font-weight: 500;
   display: flex;
@@ -40,14 +40,14 @@
 
 h1 {
   margin-top: 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 1rem;
   font-weight: 500;
   font-size: 1.5rem;
 }
 
 .subtitle {
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   margin-top: 0.5rem;
   margin-bottom: 2.5rem;
   font-size: 0.9rem;

@@ -1,8 +1,8 @@
 @use 'variables' as *;
 
 :host ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
-  background-color: $surface-color;
-  color: $primary-text-color;
+  background-color: var(--surface-color);
+  color: var(--primary-text-color);
   border-radius: 8px;
 }
 
@@ -11,12 +11,12 @@ h1[mat-dialog-title] {
   font-size: 1.25rem;
   padding-bottom: 1rem;
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-color);
 }
 
 div[mat-dialog-content] {
   p {
-    color: $secondary-text-color;
+    color: var(--secondary-text-color);
     margin-bottom: 1.5rem;
   }
 }
@@ -35,8 +35,8 @@ div[mat-dialog-content] {
     transition: background-color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      background-color: $background-color;
-      border-color: $primary-text-color;
+      background-color: var(--background-color);
+      border-color: var(--primary-text-color);
     }
   }
 }
@@ -44,7 +44,7 @@ div[mat-dialog-content] {
 div[mat-dialog-actions] {
   padding-top: 1.5rem;
   margin-top: 1.5rem;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border-color);
   margin-bottom: 1rem;
   .mdc-button{
     margin-right: 1rem;

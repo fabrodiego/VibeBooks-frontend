@@ -1,29 +1,37 @@
-@use 'variables' as v;
+@use '@angular/material' as mat;
+@use 'variables';
+@use 'theme' as t;
 @use 'sass:color';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ======================================= */
+/* APLICAÇÃO DOS TEMAS                     */
+/* ======================================= */
+.dark-theme {
+  @include mat.all-component-themes(t.$vibebooks-dark-theme);
+}
+.light-theme {
+  @include mat.all-component-themes(t.$vibebooks-light-theme);
 }
 
-html, body {
-  height: 100%;
-}
+
+/* ESTILOS GLOBAIS E BOTÕES                */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: v.$background-color;
-  color: v.$primary-text-color;
+  @include variables.dark-theme;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.light-theme {
+    @include variables.light-theme;
+  }
 }
 
 .btn-primary {
-  -webkit-appearance: none;
-  appearance: none;
-
-  background-color: v.$accent-color-vibrant !important;
-  color: white !important;
   padding: 0.6rem 1.2rem !important;
   border-radius: 4px !important;
   border: none !important;
@@ -32,9 +40,11 @@ body {
   cursor: pointer !important;
   transition: background-color 0.2s ease-in-out !important;
   line-height: normal !important;
+  background-color: var(--accent-color-vibrant) !important;
+  color: white !important;
 
   &:hover {
-    background-color: color.adjust(v.$accent-color-vibrant, $lightness: 10%) !important;
+    background-color: color.adjust(#0634BDFF, $lightness: 10%) !important;
   }
 
   &:disabled {
@@ -45,22 +55,21 @@ body {
 }
 
 .btn-stroked-warn {
-  -webkit-appearance: none;
-  appearance: none;
-
   padding: 0.6rem 1.2rem !important;
-  border: 1px solid #c94040 !important;
   border-radius: 4px !important;
   background-color: transparent !important;
-  color: #c94040 !important;
   font-weight: 500 !important;
   font-size: 0.9rem !important;
   cursor: pointer !important;
   transition: all 0.2s ease-in-out !important;
   line-height: normal !important;
 
+  $warn-color: #f44336;
+  border: 1px solid $warn-color !important;
+  color: $warn-color !important;
+
   &:hover {
-    background-color: #c94040 !important;
+    background-color: $warn-color !important;
     color: white !important;
   }
 }

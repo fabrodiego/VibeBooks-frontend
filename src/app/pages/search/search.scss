@@ -7,7 +7,7 @@
 }
 
 h1 {
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 1rem;
   margin-bottom: 2rem;
 }
@@ -21,7 +21,7 @@ h1 {
     top: 50%;
     left: 1rem;
     transform: translateY(-50%);
-    color: $secondary-text-color;
+    color: var(--secondary-text-color);
   }
 }
 
@@ -30,13 +30,13 @@ h1 {
   padding: 1rem 1rem 1rem 3rem;
   font-size: 1.2rem;
   border-radius: 8px;
-  border: 1px solid $border-color;
-  background-color: $surface-color;
-  color: $primary-text-color;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--primary-text-color);
 
   &:focus {
     outline: none;
-    border-color: $accent-color-vibrant;
+    border-color: var(--accent-color-vibrant);
   }
 }
 
@@ -45,7 +45,7 @@ h1 {
 }
 
 .info-message {
-  color: $secondary-text-color;
+  color: var(--secondary-text-color);
   text-align: center;
   padding: 2rem;
 }
@@ -58,13 +58,13 @@ h1 {
 
 .book-card {
   text-decoration: none;
-  background-color: $surface-color;
+  background-color: var(--surface-color);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  cursor: pointer; // <-- Deixa o cartão com a "mãozinha" de clique
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-5px);
@@ -80,7 +80,7 @@ h1 {
 
 .book-title {
   padding: 1rem;
-  color: $primary-text-color;
+  color: var(--primary-text-color);
   font-weight: bold;
   font-size: 0.9rem;
   text-align: center;

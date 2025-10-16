@@ -12,7 +12,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   platformId = inject(PLATFORM_ID)
-  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api/auth';
+  private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api/auth';
 
   isLoggedIn = signal<boolean>(false);
 

@@ -8,7 +8,7 @@ import { UserResponseDTO, UserUpdateDTO, PasswordChangeDTO } from '../interfaces
 })
 export class UserService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api';
+  private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api';
 
   getMe(): Observable<UserResponseDTO> {
     return this.http.get<UserResponseDTO>(`${this.apiUrl}/users/me`);

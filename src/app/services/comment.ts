@@ -8,7 +8,7 @@ import { CommentDetailsDTO } from '../interfaces/api-dtos';
 })
 export class CommentService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api';
+  private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api';
 
 
   findCommentsByBookId(bookId: string): Observable<CommentDetailsDTO[]> {

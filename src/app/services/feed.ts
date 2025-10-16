@@ -8,7 +8,7 @@ import { BookFeedDTO, PageResponseDTO } from '../interfaces/api-dtos';
 })
 export class FeedService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api';
+  private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api';
 
   getFeed(page: number, size: number): Observable<PageResponseDTO<BookFeedDTO>> {
     const params = new HttpParams()

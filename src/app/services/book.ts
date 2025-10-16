@@ -8,7 +8,7 @@ import { BookDetailsDTO, PageResponseDTO, BookIsbnDTO  } from '../interfaces/api
 })
 export class BookService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.tlgdnao.fun/vibebooks/api';
+  private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api';
 
 
   searchBooks(query: string, page: number, size: number): Observable<PageResponseDTO<BookDetailsDTO>> {

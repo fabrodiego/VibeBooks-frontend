@@ -1,31 +1,89 @@
 <div class="feed-container">
   <h1>VibeBooks</h1>
 
-  @if (isLoading()) {
+  @if (isLoading() && feedItems().length === 0) {
     <p class="loading-message">Carregando o feed...</p>
   }
 
-  @if (!isLoading() && feedItems().length > 0) {
+  @if (feedItems().length > 0) {
     <div class="feed-list">
       @for (book of feedItems(); track book.id) {
         <div class="feed-card">
           <div class="book-info">
-            <img [src]="book.coverImageUrl" [alt]="book.title" class="book-cover">
+            <img [ngSrc]="book.coverImageUrl" [alt]="book.title" class="book-cover" width="80" height="120">
             <div class="book-details">
               <h2>{{ book.title }}</h2>
               <p class="author">por {{ book.author }} ({{ book.publicationYear }})</p>
+
+              <div class="book-like-action">
+                <button class="action-btn like-btn" (click)="likeBook(book.id)" [class.liked]="book.likedByCurrentUser">
+                  <i [class]="book.likedByCurrentUser ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                  {{ book.likesCount > 0 ? book.likesCount : '' }} Amei
+                </button>
+              </div>
             </div>
           </div>
 
-          @if (book.comments.length > 0) {
-            <div class="comments-section">
-              <div class="comment">
-                <span class="comment-author">{{ book.comments[0].username }}:</span>
-                <span class="comment-text"> "{{ book.comments[0].text }}"</span>
-              </div>
+          <div class="sentiment-actions">
+            <button class="sentiment-btn">Inspirador</button>
+            <button class="sentiment-btn">Divertido</button>
+            <button class="sentiment-btn">Emocional</button>
+            <button class="sentiment-btn">Tenso</button>
+            <button class="sentiment-btn">Informativo</button>
+          </div>
+
+          <div class="card-actions">
+            <button class="action-btn" (click)="toggleComments(book.id)">
+              <i class="fa-regular fa-comment"></i> Comentários
+            </button>
+          </div>
+
+          @if (commentsVisibility().get(book.id)) {
+            <div class="comments-section-expanded">
+              @if (commentsLoading().get(book.id) && commentsMap().get(book.id)?.length === 0) {
+                <p class="comments-loading">Carregando comentários...</p>
+              } @else {
+                <form [formGroup]="commentForms.get(book.id)!" (ngSubmit)="postComment(book.id)" class="comment-form">
+                  <input type="text" formControlName="text" placeholder="Escreva um comentário...">
+                  <button type="submit" class="btn-primary" [disabled]="commentForms.get(book.id)!.invalid">Postar</button>
+                </form>
+
+                <div class="comments-list">
+                  @for (comment of commentsMap().get(book.id)!; track comment.id) {
+                    <div class="comment">
+                      <div class="comment-header">
+                        <span class="comment-author">{{ comment.username }}</span>
+                        @if (currentUser && comment.userId === currentUser.id) {
+                          <button class="delete-btn" (click)="deleteComment(comment.id, book.id)" title="Excluir comentário">&times;</button>
+                        }
+                      </div>
+                      <p class="comment-text">{{ comment.text }}</p>
+                      <div class="comment-footer">
+                        <button class="action-btn like-btn" (click)="likeComment(comment.id, book.id)" [class.liked]="comment.likedByCurrentUser">
+                          <i [class]="comment.likedByCurrentUser ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                          {{ comment.likesCount > 0 ? comment.likesCount : '' }} Curtir
+                        </button>
+                      </div>
+                    </div>
+                  } @empty {
+                    @if (!commentsLoading().get(book.id)) {
+                      <p class="no-comments">Nenhum comentário ainda. Seja o primeiro!</p>
+                    }
+                  }
+                </div>
+
+                @if (commentPaginationState().get(book.id); as state) {
+                  @if (state.currentPage + 1 < state.totalPages && !state.loadingMore) {
+                    <button class="load-more-btn" (click)="loadMoreComments(book.id)">
+                      Carregar mais comentários
+                    </button>
+                  }
+                  @if (state.loadingMore) {
+                    <p class="comments-loading more-loading">Carregando...</p>
+                  }
+                }
+              }
             </div>
-          } @else {
-            <p class="no-comments">Ainda não há comentários para este livro.</p>
           }
         </div>
       }
@@ -33,7 +91,6 @@
   }
 
   @if (!isLoading() && feedItems().length === 0) {
-    <p class="empty-feed-message">Seu feed está vazio. Siga outros usuários para ver as atividades deles!</p>
+    <p class="empty-feed-message">Seu feed está vazio.</p>
   }
-
 </div>

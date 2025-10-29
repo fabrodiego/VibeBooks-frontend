@@ -69,3 +69,133 @@
 .comment-text {
   color: var(--primary-text-color);
 }
+
+.comments-container {
+  padding-top: 1.5rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment {
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.comment-text {
+  color: var(--secondary-text-color);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--secondary-text-color);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  &:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+}
+
+.comment-footer {
+  margin-top: 0.5rem;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  font-size: 0.8rem; // Um pouco menor no modal
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--primary-text-color);
+  }
+
+  &.like-btn {
+    i {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    &:hover i {
+      color: #e91e63;
+    }
+    &.liked {
+      color: #e91e63;
+      i {
+        color: #e91e63;
+        font-weight: 900;
+      }
+    }
+  }
+}
+
+.comments-loading {
+  color: var(--secondary-text-color);
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}
+
+.no-comments {
+  color: var(--secondary-text-color);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+
+.load-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text-color);
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--hover-selection-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+  }
+}
+
+.comments-loading.more-loading {
+  padding: 1rem 0 0;
+  font-size: 0.9rem;
+}

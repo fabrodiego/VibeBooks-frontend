@@ -1,45 +1,55 @@
-<h2 mat-dialog-title><strong>{{ book()?.title || 'A carregar...' }}</strong></h2>
-
-<mat-dialog-content class="mat-typography">
-  @if (isLoading()) {
-    <div class="spinner-container">
-      <mat-spinner diameter="50"></mat-spinner>
-    </div>
-  } @else {
-    @if (book(); as b) {
-      <div class="details-container header-details">
-        <img [ngSrc]="b.coverImageUrl" [alt]="b.title" class="book-cover" width="150" height="225">
-        <div class="book-text">
-          <h3><strong>por {{ b.author }}</strong></h3>
-          <p><strong>Ano de Publicação:</strong> {{ b.publicationYear }}</p>
-          <p><strong>ISBN:</strong> {{ b.isbn }}</p>
-        </div>
-      </div>
-    }
-
+@if (isLoadingBook()) {
+  <div class="loading-container"> <mat-spinner diameter="50"></mat-spinner> </div>
+} @else if (book(); as bookData) {
+  <h1 mat-dialog-title>{{ bookData.title }}</h1>
+  <mat-dialog-content class="mat-typography">
     <mat-tab-group>
-      <mat-tab label="Detalhes">
-        <div class="tab-content">
-          <p>Aqui no futuro podemos colocar a sinopse do livro.</p>
-        </div>
-      </mat-tab>
-
-      <mat-tab label="Comentários ({{ comments().length }})">
-        <div class="tab-content">
-          @for (comment of comments(); track comment.id) {
-            <div class="comment">
-              <strong class="comment-author">{{ comment.username }}:</strong>
-              <span class="comment-text">"{{ comment.text }}"</span>
+      <mat-tab label="Comentários">
+        <div class="comments-container"> <img [ngSrc]="bookData.coverImageUrl" [alt]="bookData.title" class="book-cover" width="150" height="225">
+          @if (isLoadingComments() && comments().length === 0) {
+            <p class="comments-loading">Carregando comentários...</p>
+          } @else {
+            <div class="comments-list">
+              @for (comment of comments(); track comment.id) {
+                <div class="comment">
+                  <div class="comment-header">
+                    <span class="comment-author">{{ comment.username }}</span>
+                    @if (currentUser && comment.userId === currentUser.id) {
+                      <button class="delete-btn" (click)="deleteComment(comment.id)" title="Excluir comentário">&times;</button>
+                    }
+                  </div>
+                  <p class="comment-text">{{ comment.text }}</p>
+                  <div class="comment-footer">
+                    <button class="action-btn like-btn" (click)="likeComment(comment.id)" [class.liked]="comment.likedByCurrentUser">
+                      <i [class]="comment.likedByCurrentUser ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
+                      {{ comment.likesCount > 0 ? comment.likesCount : '' }} Curtir
+                    </button>
+                  </div>
+                </div>
+              } @empty {
+                @if (!isLoadingComments()) {
+                  <p class="no-comments">Nenhum comentário ainda.</p>
+                }
+              }
             </div>
-          } @empty {
-            <p>Ainda não há comentários. Seja o primeiro a partilhar a sua vibe!</p>
+
+            @if (commentPagination(); as state) {
+              @if (state.currentPage + 1 < state.totalPages && !state.loadingMore) {
+                <button class="load-more-btn" (click)="loadMoreComments()">
+                  Carregar mais comentários
+                </button>
+              }
+              @if (state.loadingMore) {
+                <p class="comments-loading more-loading">Carregando...</p>
+              }
+            }
           }
         </div>
       </mat-tab>
     </mat-tab-group>
-  }
-</mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Fechar</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Fechar</button>
+  </mat-dialog-actions>
+}

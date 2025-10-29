@@ -3,10 +3,23 @@ import { UUID } from "crypto";
 export interface CommentDetailsDTO {
   id: UUID;
   text: string;
+  userId: UUID;
   username: string;
   creationDate: string;
   bookId: UUID;
   bookTitle: string;
+  likesCount: number;
+  likedByCurrentUser: boolean;
+}
+
+export interface CommentCreationDTO {
+  text: string;
+  bookId: UUID;
+}
+
+export interface BookLikeResponseDTO {
+  liked: boolean;
+  totalLikes: number;
 }
 
 export interface BookDetailsDTO {
@@ -16,6 +29,8 @@ export interface BookDetailsDTO {
   isbn: string;
   publicationYear: number;
   coverImageUrl: string;
+  likesCount: number;
+  likedByCurrentUser: boolean;
 }
 
 export interface BookFeedDTO {
@@ -25,6 +40,8 @@ export interface BookFeedDTO {
   publicationYear: number;
   coverImageUrl: string;
   comments: CommentDetailsDTO[];
+  likesCount: number;
+  likedByCurrentUser: boolean;
 }
 
 export interface PageResponseDTO<T> {

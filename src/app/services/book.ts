@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BookDetailsDTO, PageResponseDTO, BookIsbnDTO  } from '../interfaces/api-dtos';
+import { BookDetailsDTO, PageResponseDTO, BookIsbnDTO, BookLikeResponseDTO  } from '../interfaces/api-dtos';
+import {UUID} from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class BookService {
   createBookByIsbn(isbn: string): Observable<BookDetailsDTO> {
     const dto: BookIsbnDTO = { isbn: isbn };
     return this.http.post<BookDetailsDTO>(`${this.apiUrl}/books`, dto);
+  }
+
+  likeBook(bookId: string | UUID): Observable<BookLikeResponseDTO> {
+    return this.http.post<BookLikeResponseDTO>(`${this.apiUrl}/books/${bookId}/like`, {});
   }
 }

@@ -61,7 +61,7 @@
                       <div class="comment-footer">
                         <button class="action-btn like-btn" (click)="likeComment(comment.id, book.id)" [class.liked]="comment.likedByCurrentUser">
                           <i [class]="comment.likedByCurrentUser ? 'fa-solid fa-heart' : 'fa-regular fa-heart'"></i>
-                          {{ comment.likesCount > 0 ? comment.likesCount : '' }} Curtir
+                          {{ comment.likesCount > 0 ? comment.likesCount : '' }} Amei
                         </button>
                       </div>
                     </div>

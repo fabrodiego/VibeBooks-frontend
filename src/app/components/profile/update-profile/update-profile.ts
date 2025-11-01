@@ -65,23 +65,23 @@ export class UpdateProfileComponent implements OnInit {
     const changedData = this.getChangedFields();
 
     if (Object.keys(changedData).length === 0) {
-      this.router.navigate(['/profile']);
+      void this.router.navigate(['/profile']);
       return;
     }
 
     this.userService.updateUser(userId, changedData).subscribe({
-      next: (updatedUser) => {
+      next: () => {
         this.snackBar.open('Perfil atualizado com sucesso!', 'Fechar', { duration: 3000 });
-        this.router.navigate(['/profile']);
+        void this.router.navigate(['/profile']);
       },
-      error: (err) => {
+      error: () => {
         this.snackBar.open('Erro ao atualizar o perfil.', 'Fechar', { duration: 3000 });
       }
     });
   }
 
   onCancel(): void {
-    this.router.navigate(['/profile']);
+    void this.router.navigate(['/profile']);
   }
 
   private getChangedFields(): any {

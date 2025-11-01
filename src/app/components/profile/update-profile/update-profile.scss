@@ -1,21 +1,34 @@
 @use 'variables' as *;
-
+@use '@angular/material' as mat;
+@use 'theme' as t;
 
 :host {
   display: flex;
   flex-direction: column;
   height: 100%;
   flex-grow: 1;
-  justify-content: center;
   overflow: hidden;
   overflow-y: auto;
   padding: 0 1rem;
+}
+
+.dark-theme :host {
+  // "...aplique estes temas aos componentes do Material DENTRO dele."
+  @include mat.form-field-theme(t.$vibebooks-dark-theme);
+  @include mat.input-theme(t.$vibebooks-dark-theme);
+}
+
+.light-theme :host {
+  @include mat.form-field-theme(t.$vibebooks-light-theme);
+  @include mat.input-theme(t.$vibebooks-light-theme);
 }
 
 .form-wrapper {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
 }
 
 .page-header {

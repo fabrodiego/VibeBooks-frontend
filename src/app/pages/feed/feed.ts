@@ -1,14 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Router } from '@angular/router';
 import { FeedService } from '../../services/feed';
 import { CommentService } from '../../services/comment';
-import { UserService } from '../../services/user';
 import { BookService } from '../../services/book';
-import { BookFeedDTO, CommentDetailsDTO, UserResponseDTO, BookLikeResponseDTO, CommentCreationDTO } from '../../interfaces/api-dtos';
+import { BookFeedDTO, CommentDetailsDTO, BookLikeResponseDTO, CommentCreationDTO } from '../../interfaces/api-dtos';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UUID } from 'crypto';
+import {AuthService} from '../../services/auth';
 
 interface CommentPaginationState {
   currentPage: number;
@@ -26,11 +25,10 @@ interface CommentPaginationState {
 export class FeedComponent implements OnInit {
   private feedService = inject(FeedService);
   private commentService = inject(CommentService);
-  private userService = inject(UserService);
   private bookService = inject(BookService);
   private fb = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
-  private router = inject(Router);
+  private authService = inject(AuthService);
 
   feedItems = signal<BookFeedDTO[]>([]);
   isLoading = signal(true);
@@ -41,24 +39,14 @@ export class FeedComponent implements OnInit {
   commentsLoading = signal(new Map<UUID, boolean>());
   commentForms = new Map<UUID, FormGroup>();
   commentPaginationState = signal(new Map<UUID, CommentPaginationState>());
-  currentUser: UserResponseDTO | null = null;
+
+  currentUser = this.authService.currentUser();
+
   private readonly COMMENTS_PAGE_SIZE = 5;
 
   ngOnInit(): void {
     this.isLoading.set(true);
-
-    this.userService.getMe().subscribe({
-      next: (user: UserResponseDTO) => {
-        this.currentUser = user;
-        this.loadFeed();
-      },
-      error: (err) => {
-        console.error("Failed to load current user, redirecting to login:", err);
-        this.snackBar.open('Sessão inválida ou expirada. Faça login novamente.', 'Fechar', { duration: 5000 });
-        this.isLoading.set(false);
-        void this.router.navigate(['/login']);
-      }
-    });
+    this.loadFeed();
   }
 
   loadFeed(page = 0): void {

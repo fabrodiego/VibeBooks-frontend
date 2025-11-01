@@ -15,7 +15,6 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
 
   { path: 'feed', component: FeedComponent, canActivate: [authGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'add-book', component: AddBookComponent, canActivate: [authGuard] },
   { path: 'search', component: SearchComponent, canActivate: [authGuard] },
 
@@ -24,7 +23,6 @@ export const routes: Routes = [
     component: ProfileComponent,
     canActivate: [authGuard],
     children: [
-      { path: '', component: UpdateProfileComponent },
       { path: 'personal-data', component: UpdateProfileComponent },
       { path: 'security', component: ChangePasswordComponent },
       { path: 'theme', component: ThemeSettingsComponent },

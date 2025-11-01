@@ -1,18 +1,37 @@
-import {inject, PLATFORM_ID} from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { inject, PLATFORM_ID } from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import { CanActivateFn } from '@angular/router';
+import { AuthService } from '../services/auth';
+import { UserService } from '../services/user';
+import { of, map, catchError } from 'rxjs';
 
 export const authGuard: CanActivateFn = () => {
-  const router = inject(Router);
+  const authService = inject(AuthService);
+  const userService = inject(UserService);
   const platformId = inject(PLATFORM_ID);
 
-  if (isPlatformBrowser(platformId)) {
-    const token = localStorage.getItem('vibebooks_token');
-    if (token) {
-      return true;
-    }
+  if (!isPlatformBrowser(platformId)) {
+    return true;
   }
 
-  router.navigate(['/login']).catch(err => console.error('Redirect to login failed', err));
-  return false;
+  if (authService.currentUser()) {
+    return true;
+  }
+
+  if (!authService.isTokenValid()) {
+    authService.logout();
+    return false;
+  }
+
+  return userService.getMe().pipe(
+    map((user) => {
+      authService.currentUser.set(user);
+      authService.isLoggedIn.set(true);
+      return true;
+    }),
+    catchError(() => {
+      authService.logout();
+      return of(false);
+    })
+  );
 };

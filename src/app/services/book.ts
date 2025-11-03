@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BookDetailsDTO, PageResponseDTO, BookIsbnDTO, BookLikeResponseDTO  } from '../interfaces/api-dtos';
+import { BookDetailsDTO, PageResponseDTO, BookIsbnDTO, BookLikeResponseDTO, BookStatusSentimentDTO, BookStatusSentimentResponseDTO } from '../interfaces/api-dtos';
 import {UUID} from 'crypto';
 
 @Injectable({
@@ -32,5 +32,9 @@ export class BookService {
 
   likeBook(bookId: string | UUID): Observable<BookLikeResponseDTO> {
     return this.http.post<BookLikeResponseDTO>(`${this.apiUrl}/books/${bookId}/like`, {});
+  }
+
+  updateBookStatus(bookId: string | UUID, data: BookStatusSentimentDTO): Observable<BookStatusSentimentResponseDTO> {
+    return this.http.post<BookStatusSentimentResponseDTO>(`${this.apiUrl}/books/${bookId}/status`, data);
   }
 }

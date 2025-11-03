@@ -262,3 +262,60 @@ h1 {
 :host::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-text-color);
 }
+
+.book-status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.status-btn {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--hover-selection-color);
+    border-color: var(--accent-color-vibrant);
+    color: var(--accent-color-vibrant);
+  }
+
+  &.active {
+    background-color: var(--accent-color-vibrant);
+    color: var(--background-color);
+    border-color: var(--accent-color-vibrant);
+    font-weight: bold;
+  }
+}
+
+.sentiment-actions {
+  margin-top: 1rem;
+  padding-top: 0;
+  border-top: none;
+  transition: opacity 0.3s ease;
+
+  .sentiment-btn.active {
+    background-color: var(--hover-selection-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    font-weight: 500;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none; // Impede o clique
+
+    .sentiment-btn {
+      cursor: not-allowed;
+    }
+  }
+}

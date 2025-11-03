@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FeedService } from '../../services/feed';
 import { CommentService } from '../../services/comment';
 import { BookService } from '../../services/book';
-import { BookFeedDTO, CommentDetailsDTO, BookLikeResponseDTO, CommentCreationDTO } from '../../interfaces/api-dtos';
+import { BookFeedDTO, CommentDetailsDTO, BookLikeResponseDTO, CommentCreationDTO, BookStatus, BookSentiment, BookStatusSentimentDTO } from '../../interfaces/api-dtos';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { UUID } from 'crypto';
@@ -30,6 +30,23 @@ export class FeedComponent implements OnInit {
   private snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
 
+  statusOptions: { key: BookStatus; label: string }[] = [
+    { key: 'WANT_TO_READ', label: 'Quero Ler' },
+    { key: 'READING', label: 'Lendo' },
+    { key: 'READ', label: 'Lido' },
+  ];
+
+  sentimentOptions: { key: BookSentiment; label: string }[] = [
+    { key: 'INSPIRING', label: 'Inspirador' },
+    { key: 'FUN', label: 'Divertido' },
+    { key: 'EMOTIONAL', label: 'Emocional' },
+    { key: 'TENSE', label: 'Tenso' },
+    { key: 'INFORMATIVE', label: 'Informativo' },
+    { key: 'BORING', label: 'Chato' },
+    { key: 'CONFUSING', label: 'Confuso' },
+    { key: 'MOTIVATIONAL', label: 'Motivacional' },
+  ];
+
   feedItems = signal<BookFeedDTO[]>([]);
   isLoading = signal(true);
   currentPage = signal(0);
@@ -52,9 +69,8 @@ export class FeedComponent implements OnInit {
   loadFeed(page = 0): void {
     this.feedService.getFeed(page, 10).subscribe({
       next: (response) => {
-        const currentItem = page === 0 ? [] : this.feedItems();
-        const newItems = response.content;
-
+        const currentItems = page === 0 ? [] : this.feedItems();
+        const newItems: BookFeedDTO[] = response.content;
         const newVisibility = new Map(this.commentsVisibility());
         const newLoading = new Map(this.commentsLoading());
         const newCommentData = new Map(this.commentsMap());
@@ -76,7 +92,7 @@ export class FeedComponent implements OnInit {
         this.commentsMap.set(newCommentData);
         this.commentPaginationState.set(newPagination);
 
-        this.feedItems.set([...currentItem, ...newItems]);
+        this.feedItems.set([...currentItems, ...newItems]);
         this.currentPage.set(response.currentPage);
         this.totalPages.set(response.totalPages);
         this.isLoading.set(false);
@@ -230,6 +246,61 @@ export class FeedComponent implements OnInit {
         );
       },
       error: () => this.snackBar.open('Erro ao curtir o livro.', 'Fechar', { duration: 3000 })
+    });
+  }
+
+  handleStatusClick(book: BookFeedDTO, newStatus: BookStatus): void {
+    const statusToSend = (book.status === newStatus) ? null : newStatus;
+
+    const sentimentToSend = (statusToSend === 'READING' || statusToSend === 'READ')
+      ? book.sentiment
+      : null;
+
+    const dto: BookStatusSentimentDTO = {
+      status: statusToSend,
+      sentiment: sentimentToSend
+    };
+
+    this.bookService.updateBookStatus(book.id, dto).subscribe({
+      next: (response) => {
+        this.feedItems.update(items =>
+          items.map(item =>
+            item.id === book.id
+              ? { ...item, status: response.status, sentiment: response.sentiment }
+              : item
+          )
+        );
+        this.snackBar.open('Status atualizado!', 'Fechar', { duration: 2000 });
+      },
+      error: () => this.snackBar.open('Erro ao atualizar status.', 'Fechar', { duration: 3000 })
+    });
+  }
+
+  handleSentimentClick(book: BookFeedDTO, newSentiment: BookSentiment): void {
+    if (!book.status || (book.status !== 'READING' && book.status !== 'READ')) {
+      this.snackBar.open('Você precisa marcar como "Lendo" ou "Lido" para adicionar um sentimento.', 'Fechar', { duration: 4000 });
+      return;
+    }
+
+    const sentimentToSend = (book.sentiment === newSentiment) ? null : newSentiment;
+
+    const dto: BookStatusSentimentDTO = {
+      status: book.status!,
+      sentiment: sentimentToSend
+    };
+
+    this.bookService.updateBookStatus(book.id, dto).subscribe({
+      next: (response) => {
+        this.feedItems.update(items =>
+          items.map(item =>
+            item.id === book.id
+              ? { ...item, status: response.status, sentiment: response.sentiment }
+              : item
+          )
+        );
+        this.snackBar.open('Sentimento atualizado!', 'Fechar', { duration: 2000 });
+      },
+      error: () => this.snackBar.open('Erro ao atualizar sentimento.', 'Fechar', { duration: 3000 })
     });
   }
 }

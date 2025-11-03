@@ -24,12 +24,24 @@
             </div>
           </div>
 
-          <div class="sentiment-actions">
-            <button class="sentiment-btn">Inspirador</button>
-            <button class="sentiment-btn">Divertido</button>
-            <button class="sentiment-btn">Emocional</button>
-            <button class="sentiment-btn">Tenso</button>
-            <button class="sentiment-btn">Informativo</button>
+          <div class="book-status-actions">
+            @for (status of statusOptions; track status.key) {
+              <button
+                class="status-btn"
+                [class.active]="book.status === status.key" (click)="handleStatusClick(book, status.key)">
+                {{ status.label }}
+              </button>
+            }
+          </div>
+
+          <div class="sentiment-actions"
+               [class.disabled]="book.status !== 'READING' && book.status !== 'READ'" title="{{ (book.status !== 'READING' && book.status !== 'READ') ? 'Marque como Lendo ou Lido para definir um sentimento' : '' }}"> @for (sentiment of sentimentOptions; track sentiment.key) {
+            <button
+              class="sentiment-btn"
+              [class.active]="book.sentiment === sentiment.key" (click)="handleSentimentClick(book, sentiment.key)">
+              {{ sentiment.label }}
+            </button>
+            }
           </div>
 
           <div class="card-actions">

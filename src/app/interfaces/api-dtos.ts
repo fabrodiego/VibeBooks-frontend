@@ -42,6 +42,8 @@ export interface BookFeedDTO {
   comments: CommentDetailsDTO[];
   likesCount: number;
   likedByCurrentUser: boolean;
+  status?: BookStatus | null;
+  sentiment?: BookSentiment | null;
 }
 
 export interface PageResponseDTO<T> {
@@ -81,4 +83,27 @@ export interface BookIsbnDTO {
 export interface PasswordChangeDTO {
   oldPassword: string;
   newPassword: string;
+}
+
+export type BookStatus = 'WANT_TO_READ' | 'READING' | 'READ';
+
+export type BookSentiment =
+  | 'INSPIRING'
+  | 'FUN'
+  | 'EMOTIONAL'
+  | 'TENSE'
+  | 'INFORMATIVE'
+  | 'BORING'
+  | 'CONFUSING'
+  | 'MOTIVATIONAL';
+
+export interface BookStatusSentimentDTO {
+  status: BookStatus | null;
+  sentiment?: BookSentiment | null;
+}
+
+export interface BookStatusSentimentResponseDTO {
+  bookId: UUID;
+  status: BookStatus | null;
+  sentiment?: BookSentiment | null;
 }

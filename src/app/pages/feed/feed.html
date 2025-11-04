@@ -10,7 +10,13 @@
       @for (book of feedItems(); track book.id) {
         <div class="feed-card">
           <div class="book-info">
-            <img [ngSrc]="book.coverImageUrl" [alt]="book.title" class="book-cover" width="80" height="120">
+            <img [ngSrc]="book.coverImageUrl"
+                 [alt]="book.title"
+                 class="book-cover"
+                 width="80"
+                 height="120"
+                 (error)="$any($event.target).src = 'assets/images/placeholder-cover.png'"
+                 [priority]="$first">
             <div class="book-details">
               <h2>{{ book.title }}</h2>
               <p class="author">por {{ book.author }} ({{ book.publicationYear }})</p>

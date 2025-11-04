@@ -1,5 +1,22 @@
 @use 'variables' as *;
 
+:host ::ng-deep mat-dialog-content {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-text-color);
+    border-radius: 10px;
+    border: 2px solid var(--surface-color);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-text-color);
+  }
+}
+
 .details-container, .tab-content {
   color: var(--secondary-text-color);
 }
@@ -14,6 +31,36 @@
   margin-bottom: 1.5rem;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.tab-content {
+  padding: 1.5rem 0.5rem;
+}
+
+.book-details-layout {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding-top: 1rem;
+}
+
+.book-cover-column {
+  flex-shrink: 0;
+}
+
+.book-actions-column {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .book-cover {
   width: 150px;
   height: auto;
@@ -22,55 +69,160 @@
   flex-shrink: 0;
 }
 
+.book-text-details {
+  margin-bottom: 0.5rem;
+  .author {
+    margin: 0 0 0.25rem;
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+  }
+  .year {
+    margin: 0;
+    color: var(--secondary-text-color);
+    font-size: 0.8rem;
+  }
+}
+
 .book-text {
   h3 {
     margin-top: 0;
     font-weight: normal;
     color: var(--secondary-text-color);
   }
-
   p {
     margin-bottom: 0.5rem;
     color: var(--secondary-text-color);
-
     strong {
       color: var(--secondary-text-color);
     }
   }
 }
 
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-}
+.book-like-action {
+  .like-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
 
-
-.tab-content {
-  padding: 1.5rem 0.5rem;
-}
-
-.comment {
-  border-bottom: 1px solid var(--secondary-text-color);
-  padding: 1rem 0;
-
-  &:last-child {
-    border-bottom: none;
+    i {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    &:hover i {
+      color: #e91e63;
+    }
+    &.liked {
+      color: #e91e63;
+      i {
+        color: #e91e63;
+        font-weight: 900;
+      }
+    }
   }
 }
 
-.comment-author {
-  font-weight: bold;
-  color: var(--secondary-text-color);
-  margin-right: 0.5rem;
+.book-status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
 }
 
-.comment-text {
-  color: var(--primary-text-color);
+.status-btn {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--hover-selection-color);
+    border-color: var(--accent-color-vibrant);
+    color: var(--accent-color-vibrant);
+  }
+
+  &.active {
+    background-color: var(--accent-color-vibrant);
+    color: var(--background-color);
+    border-color: var(--accent-color-vibrant);
+    font-weight: bold;
+  }
+}
+
+.sentiment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0;
+  border-top: none;
+  transition: opacity 0.3s ease;
+  width: 100%;
+
+  .sentiment-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover {
+      background-color: var(--hover-selection-color);
+      color: var(--primary-text-color);
+      border-color: var(--primary-text-color);
+    }
+  }
+
+  .sentiment-btn.active {
+    background-color: var(--hover-selection-color);
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    font-weight: 500;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    .sentiment-btn {
+      cursor: not-allowed;
+    }
+  }
 }
 
 .comments-container {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.comments-toggle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  h2 {
+    margin: 0;
+    color: var(--primary-text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  i {
+    color: var(--secondary-text-color);
+    transition: transform 0.2s ease;
+  }
+}
+
+.comments-list-wrapper {
   padding-top: 1.5rem;
 }
 
@@ -109,22 +261,6 @@
   word-break: break-word;
 }
 
-.delete-btn {
-  background: none;
-  border: none;
-  color: var(--secondary-text-color);
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0.2rem;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  &:hover {
-    color: #f44336;
-    background-color: rgba(244, 67, 54, 0.1);
-  }
-}
-
 .comment-footer {
   margin-top: 0.5rem;
 }
@@ -134,7 +270,7 @@
   border: none;
   color: var(--secondary-text-color);
   cursor: pointer;
-  font-size: 0.8rem; // Um pouco menor no modal
+  font-size: 0.8rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -163,18 +299,20 @@
   }
 }
 
-.comments-loading {
+.delete-btn {
+  background: none;
+  border: none;
   color: var(--secondary-text-color);
-  text-align: center;
-  padding: 2rem 0;
-  font-style: italic;
-}
-
-.no-comments {
-  color: var(--secondary-text-color);
-  font-style: italic;
-  font-size: 0.9rem;
-  padding: 1rem 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  &:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+  }
 }
 
 .load-more-btn {
@@ -195,7 +333,21 @@
   }
 }
 
+.comments-loading {
+  color: var(--secondary-text-color);
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}
+
 .comments-loading.more-loading {
   padding: 1rem 0 0;
   font-size: 0.9rem;
+}
+
+.no-comments {
+  color: var(--secondary-text-color);
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 1rem 0;
 }

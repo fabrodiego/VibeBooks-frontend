@@ -31,6 +31,8 @@ export interface BookDetailsDTO {
   coverImageUrl: string;
   likesCount: number;
   likedByCurrentUser: boolean;
+  status?: BookStatus | null;
+  sentiment?: BookSentiment | null;
 }
 
 export interface BookFeedDTO {

@@ -404,3 +404,20 @@
   font-style: italic;
   margin: 0;
 }
+
+@media (max-width: 768px) {
+  .book-details-layout {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .book-actions-column {
+    width: 100%;
+    align-items: center;
+  }
+
+  .book-text-details {
+    text-align: center;
+  }
+}

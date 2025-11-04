@@ -1,6 +1,7 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { UserResponseDTO, UserUpdateDTO, PasswordChangeDTO } from '../interfaces/api-dtos';
 
 @Injectable({
@@ -9,9 +10,15 @@ import { UserResponseDTO, UserUpdateDTO, PasswordChangeDTO } from '../interfaces
 export class UserService {
   private http = inject(HttpClient);
   private apiUrl = 'https://api-vibebooks.fabrodiego.com/vibebooks/api';
+  private platformId = inject(PLATFORM_ID);
 
   getMe(): Observable<UserResponseDTO> {
-    return this.http.get<UserResponseDTO>(`${this.apiUrl}/users/me`);
+
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.get<UserResponseDTO>(`${this.apiUrl}/users/me`);
+    } else {
+      return EMPTY;
+    }
   }
 
   updateUser(userId: string, data: UserUpdateDTO): Observable<UserResponseDTO> {

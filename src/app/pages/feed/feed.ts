@@ -57,6 +57,20 @@ export class FeedComponent implements OnInit {
   commentForms = new Map<UUID, FormGroup>();
   commentPaginationState = signal(new Map<UUID, CommentPaginationState>());
 
+  getCommunitySentiments(counts: Record<BookSentiment, number> | undefined) {
+    if (!counts) {
+      return [];
+    }
+
+    return this.sentimentOptions
+      .map(option => ({
+        label: option.label,
+        count: counts[option.key] || 0
+      }))
+      .filter(sentiment => sentiment.count > 0)
+      .sort((a, b) => b.count - a.count);
+  }
+
   currentUser = this.authService.currentUser();
 
   private readonly COMMENTS_PAGE_SIZE = 5;

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import {Component, OnInit, inject, signal, computed} from '@angular/core';
 import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { BookService } from '../../services/book';
 import { CommentService } from '../../services/comment';
@@ -60,6 +60,23 @@ export class BookDetailsComponent implements OnInit {
   isLoadingComments = signal(true);
   isCommentsVisible = signal(true);
   commentPagination = signal<CommentPaginationState>({ currentPage: -1, totalPages: 0, loadingMore: false });
+
+  public communitySentiments = computed(() => {
+    const bookData = this.book();
+    if (!bookData || !bookData.sentimentCounts) {
+      return [];
+    }
+
+    const counts = bookData.sentimentCounts;
+
+    return this.sentimentOptions
+      .map(option => ({
+        label: option.label,
+        count: counts[option.key] || 0
+      }))
+      .filter(sentiment => sentiment.count > 0)
+      .sort((a, b) => b.count - a.count);
+  });
 
   currentUser: UserResponseDTO | null = null;
 

@@ -351,3 +351,56 @@
   font-size: 0.9rem;
   padding: 1rem 0;
 }
+
+.community-sentiments-container {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+
+  h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+.community-sentiments-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sentiment-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--secondary-text-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.sentiment-count {
+  background-color: var(--accent-color-vibrant);
+  color: var(--background-color);
+  font-weight: bold;
+  font-size: 0.75rem;
+  border-radius: 10px;
+  padding: 0.1rem 0.4rem;
+  min-width: 18px;
+  text-align: center;
+}
+
+.no-sentiments {
+  font-size: 0.85rem;
+  color: var(--secondary-text-color);
+  font-style: italic;
+  margin: 0;
+}

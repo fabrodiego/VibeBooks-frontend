@@ -41,12 +41,32 @@
           </div>
 
           <div class="sentiment-actions"
-               [class.disabled]="book.status !== 'READING' && book.status !== 'READ'" title="{{ (book.status !== 'READING' && book.status !== 'READ') ? 'Marque como Lendo ou Lido para definir um sentimento' : '' }}"> @for (sentiment of sentimentOptions; track sentiment.key) {
-            <button
-              class="sentiment-btn"
-              [class.active]="book.sentiment === sentiment.key" (click)="handleSentimentClick(book, sentiment.key)">
-              {{ sentiment.label }}
-            </button>
+               [class.disabled]="book.status !== 'READING' && book.status !== 'READ'"
+               title="{{ (book.status !== 'READING' && book.status !== 'READ') ? 'Marque como Lendo ou Lido para definir um sentimento' : '' }}">
+
+            @for (sentiment of sentimentOptions; track sentiment.key) {
+              <button
+                class="sentiment-btn"
+                [class.active]="book.sentiment === sentiment.key"
+                (click)="handleSentimentClick(book, sentiment.key)">
+                {{ sentiment.label }}
+              </button>
+            }
+          </div>
+
+          <div class="community-sentiments-container">
+
+            @let communitySentiments = getCommunitySentiments(book.sentimentCounts);
+
+            @if (communitySentiments.length > 0) {
+              <div class="community-sentiments-list">
+                @for (sentiment of communitySentiments; track sentiment.label) {
+                  <span class="sentiment-badge">
+                    {{ sentiment.label }}
+                    <span class="sentiment-count">{{ sentiment.count }}</span>
+                  </span>
+                }
+              </div>
             }
           </div>
 
@@ -91,9 +111,9 @@
                 </div>
 
                 @if (commentPaginationState().get(book.id); as state) {
-                  @if (state.currentPage + 1 < state.totalPages && !state.loadingMore) {
+                  @if (state.currentPage + 1 < state.totalPages) {
                     <button class="load-more-btn" (click)="loadMoreComments(book.id)">
-                      Carregar mais comentários
+                      Carregando mais comentários
                     </button>
                   }
                   @if (state.loadingMore) {

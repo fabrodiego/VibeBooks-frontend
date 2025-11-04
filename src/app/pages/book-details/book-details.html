@@ -35,6 +35,7 @@
         <div class="sentiment-actions"
              [class.disabled]="bookData.status !== 'READING' && bookData.status !== 'READ'"
              title="{{ (bookData.status !== 'READING' && bookData.status !== 'READ') ? 'Marque como Lendo ou Lido para definir um sentimento' : '' }}">
+
           @for (sentiment of sentimentOptions; track sentiment.key) {
             <button
               class="sentiment-btn"
@@ -43,6 +44,22 @@
               {{ sentiment.label }}
             </button>
           }
+        </div>
+
+        <div class="community-sentiments-container">
+          <h3>Sentimentos da Comunidade</h3>
+          <div class="community-sentiments-list">
+            @for (sentiment of communitySentiments(); track sentiment.label) {
+              <span class="sentiment-badge">
+                {{ sentiment.label }}
+                <span class="sentiment-count">{{ sentiment.count }}</span>
+              </span>
+            } @empty {
+              <p class="no-sentiments">
+                Seja o primeiro a registrar um sentimento para este livro.
+              </p>
+            }
+          </div>
         </div>
       </div>
     </div>

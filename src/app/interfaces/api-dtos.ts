@@ -33,6 +33,7 @@ export interface BookDetailsDTO {
   likedByCurrentUser: boolean;
   status?: BookStatus | null;
   sentiment?: BookSentiment | null;
+  sentimentCounts?: Record<BookSentiment, number>
 }
 
 export interface BookFeedDTO {
@@ -46,6 +47,7 @@ export interface BookFeedDTO {
   likedByCurrentUser: boolean;
   status?: BookStatus | null;
   sentiment?: BookSentiment | null;
+  sentimentCounts?: Record<BookSentiment, number>
 }
 
 export interface PageResponseDTO<T> {

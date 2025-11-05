@@ -181,6 +181,7 @@ export class BookDetailsComponent implements OnInit {
   }
 
   handleStatusClick(book: BookDetailsDTO, newStatus: BookStatus): void {
+    const oldSentiment = book.sentiment;
     const statusToSend = (book.status === newStatus) ? null : newStatus;
     const sentimentToSend = (statusToSend === 'READING' || statusToSend === 'READ')
       ? book.sentiment
@@ -193,10 +194,21 @@ export class BookDetailsComponent implements OnInit {
 
     this.bookService.updateBookStatus(book.id, dto).subscribe({
       next: (response) => {
+        const newCounts = { ...book.sentimentCounts };
+
+        const sentimentWasRemoved = oldSentiment && response.sentiment === null;
+
+        if (sentimentWasRemoved) {
+          if (newCounts[oldSentiment!]) {
+            newCounts[oldSentiment!] = (newCounts[oldSentiment!] || 1) - 1;
+          }
+        }
+
         this.book.update(currentBook => ({
           ...currentBook!,
           status: response.status,
-          sentiment: response.sentiment
+          sentiment: response.sentiment,
+          sentimentCounts: newCounts
         }));
         this.snackBar.open('Status atualizado!', 'Fechar', { duration: 2000 });
       },
@@ -210,6 +222,7 @@ export class BookDetailsComponent implements OnInit {
       return;
     }
 
+    const oldSentiment = book.sentiment;
     const sentimentToSend = (book.sentiment === newSentiment) ? null : newSentiment;
 
     const dto: BookStatusSentimentDTO = {
@@ -219,10 +232,23 @@ export class BookDetailsComponent implements OnInit {
 
     this.bookService.updateBookStatus(book.id, dto).subscribe({
       next: (response) => {
+        const newCounts = { ...book.sentimentCounts };
+
+        if (oldSentiment && oldSentiment !== response.sentiment) {
+          if (newCounts[oldSentiment!]) {
+            newCounts[oldSentiment!] = (newCounts[oldSentiment!] || 1) - 1;
+          }
+        }
+
+        if (response.sentiment && oldSentiment !== response.sentiment) {
+          newCounts[response.sentiment] = (newCounts[response.sentiment] || 0) + 1;
+        }
+
         this.book.update(currentBook => ({
           ...currentBook!,
           status: response.status,
-          sentiment: response.sentiment
+          sentiment: response.sentiment,
+          sentimentCounts: newCounts
         }));
         this.snackBar.open('Sentimento atualizado!', 'Fechar', { duration: 2000 });
       },

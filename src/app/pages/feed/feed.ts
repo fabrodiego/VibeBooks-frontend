@@ -31,20 +31,20 @@ export class FeedComponent implements OnInit {
   private authService = inject(AuthService);
 
   statusOptions: { key: BookStatus; label: string }[] = [
-    { key: 'WANT_TO_READ', label: 'Quero Ler' },
-    { key: 'READING', label: 'Lendo' },
-    { key: 'READ', label: 'Lido' },
+    {key: 'WANT_TO_READ', label: 'Quero Ler'},
+    {key: 'READING', label: 'Lendo'},
+    {key: 'READ', label: 'Lido'},
   ];
 
   sentimentOptions: { key: BookSentiment; label: string }[] = [
-    { key: 'INSPIRING', label: 'Inspirador' },
-    { key: 'FUN', label: 'Divertido' },
-    { key: 'EMOTIONAL', label: 'Emocional' },
-    { key: 'TENSE', label: 'Tenso' },
-    { key: 'INFORMATIVE', label: 'Informativo' },
-    { key: 'BORING', label: 'Chato' },
-    { key: 'CONFUSING', label: 'Confuso' },
-    { key: 'MOTIVATIONAL', label: 'Motivacional' },
+    {key: 'INSPIRING', label: 'Inspirador'},
+    {key: 'FUN', label: 'Divertido'},
+    {key: 'EMOTIONAL', label: 'Emocional'},
+    {key: 'TENSE', label: 'Tenso'},
+    {key: 'INFORMATIVE', label: 'Informativo'},
+    {key: 'BORING', label: 'Chato'},
+    {key: 'CONFUSING', label: 'Confuso'},
+    {key: 'MOTIVATIONAL', label: 'Motivacional'},
   ];
 
   feedItems = signal<BookFeedDTO[]>([]);
@@ -99,7 +99,7 @@ export class FeedComponent implements OnInit {
           newVisibility.set(book.id, false);
           newLoading.set(book.id, false);
           newCommentData.set(book.id, []);
-          newPagination.set(book.id, { currentPage: -1, totalPages: 0, loadingMore: false });
+          newPagination.set(book.id, {currentPage: -1, totalPages: 0, loadingMore: false});
         });
         this.commentsVisibility.set(newVisibility);
         this.commentsLoading.set(newLoading);
@@ -114,12 +114,12 @@ export class FeedComponent implements OnInit {
       error: (err) => {
         console.error('Failed to load feed', err);
         this.isLoading.set(false);
-        this.snackBar.open('Erro ao carregar o feed.', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Erro ao carregar o feed.', 'Fechar', {duration: 3000});
       }
     });
   }
 
-  toggleComments(bookId: UUID) : void {
+  toggleComments(bookId: UUID): void {
     const currentVisibility = this.commentsVisibility();
     const isVisible = currentVisibility.get(bookId);
     const newVisibility = new Map(currentVisibility);
@@ -146,7 +146,7 @@ export class FeedComponent implements OnInit {
       },
       error: () => {
         this.commentsLoading.update(currentMap => new Map(currentMap).set(bookId, false));
-        this.snackBar.open('Erro ao carregar comentários.', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Erro ao carregar comentários.', 'Fechar', {duration: 3000});
       }
     });
   }
@@ -155,8 +155,8 @@ export class FeedComponent implements OnInit {
     this.commentsLoading.update(currentMap => new Map(currentMap).set(bookId, true));
     this.commentPaginationState.update(currentMap => {
       const newState = new Map(currentMap);
-      const currentState = newState.get(bookId) ?? { currentPage: -1, totalPages: 0, loadingMore: false };
-      newState.set(bookId, { ...currentState, loadingMore: page > 0 });
+      const currentState = newState.get(bookId) ?? {currentPage: -1, totalPages: 0, loadingMore: false};
+      newState.set(bookId, {...currentState, loadingMore: page > 0});
       return newState;
     });
 
@@ -179,11 +179,11 @@ export class FeedComponent implements OnInit {
         this.commentsLoading.update(currentMap => new Map(currentMap).set(bookId, false));
         this.commentPaginationState.update(currentMap => {
           const newState = new Map(currentMap);
-          const currentState = newState.get(bookId) ?? { currentPage: -1, totalPages: 0, loadingMore: false };
-          newState.set(bookId, { ...currentState, loadingMore: false });
+          const currentState = newState.get(bookId) ?? {currentPage: -1, totalPages: 0, loadingMore: false};
+          newState.set(bookId, {...currentState, loadingMore: false});
           return newState;
         });
-        this.snackBar.open('Erro ao carregar comentários.', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Erro ao carregar comentários.', 'Fechar', {duration: 3000});
       }
     });
   }
@@ -199,7 +199,7 @@ export class FeedComponent implements OnInit {
     const form = this.commentForms.get(bookId);
     if (!form || form.invalid || !this.currentUser)
       return;
-    const commentData: CommentCreationDTO = { bookId, text: form.value.text };
+    const commentData: CommentCreationDTO = {bookId, text: form.value.text};
 
     this.commentService.createComment(commentData).subscribe({
       next: (newComment: CommentDetailsDTO) => {
@@ -210,9 +210,9 @@ export class FeedComponent implements OnInit {
           return newMap;
         });
         form.reset();
-        this.snackBar.open('Comentário postado!', 'Fechar', { duration: 3000});
+        this.snackBar.open('Comentário postado!', 'Fechar', {duration: 3000});
       },
-      error: () => this.snackBar.open('Erro ao postar comentário.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao postar comentário.', 'Fechar', {duration: 3000})
     });
   }
 
@@ -229,7 +229,7 @@ export class FeedComponent implements OnInit {
           return newMap;
         });
       },
-      error: () => this.snackBar.open('Erro ao curtir comentário.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao curtir comentário.', 'Fechar', {duration: 3000})
     });
   }
 
@@ -242,9 +242,9 @@ export class FeedComponent implements OnInit {
           newMap.set(bookId, updatedComments);
           return newMap;
         });
-        this.snackBar.open('Comentário excluído.', 'Fechar', { duration: 3000 });
+        this.snackBar.open('Comentário excluído.', 'Fechar', {duration: 3000});
       },
-      error: () => this.snackBar.open('Erro ao excluir comentário.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao excluir comentário.', 'Fechar', {duration: 3000})
     });
   }
 
@@ -254,18 +254,19 @@ export class FeedComponent implements OnInit {
         this.feedItems.update(items =>
           items.map(book =>
             book.id === bookId
-              ? { ...book, likedByCurrentUser: response.liked, likesCount: response.totalLikes }
+              ? {...book, likedByCurrentUser: response.liked, likesCount: response.totalLikes}
               : book
           )
         );
       },
-      error: () => this.snackBar.open('Erro ao curtir o livro.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao curtir o livro.', 'Fechar', {duration: 3000})
     });
   }
 
   handleStatusClick(book: BookFeedDTO, newStatus: BookStatus): void {
-    const statusToSend = (book.status === newStatus) ? null : newStatus;
+    const oldSentiment = book.sentiment;
 
+    const statusToSend = (book.status === newStatus) ? null : newStatus;
     const sentimentToSend = (statusToSend === 'READING' || statusToSend === 'READ')
       ? book.sentiment
       : null;
@@ -277,25 +278,40 @@ export class FeedComponent implements OnInit {
 
     this.bookService.updateBookStatus(book.id, dto).subscribe({
       next: (response) => {
+        const newCounts = {...book.sentimentCounts};
+        const sentimentWasRemoved = oldSentiment && response.sentiment === null;
+
+        if (sentimentWasRemoved) {
+          if (newCounts[oldSentiment!]) {
+            newCounts[oldSentiment!] = (newCounts[oldSentiment!] || 1) - 1;
+          }
+        }
+
         this.feedItems.update(items =>
           items.map(item =>
             item.id === book.id
-              ? { ...item, status: response.status, sentiment: response.sentiment }
+              ? {
+                ...item,
+                status: response.status,
+                sentiment: response.sentiment,
+                sentimentCounts: newCounts
+              }
               : item
           )
         );
-        this.snackBar.open('Status atualizado!', 'Fechar', { duration: 2000 });
+        this.snackBar.open('Status atualizado!', 'Fechar', {duration: 2000});
       },
-      error: () => this.snackBar.open('Erro ao atualizar status.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao atualizar status.', 'Fechar', {duration: 3000})
     });
   }
 
   handleSentimentClick(book: BookFeedDTO, newSentiment: BookSentiment): void {
     if (!book.status || (book.status !== 'READING' && book.status !== 'READ')) {
-      this.snackBar.open('Você precisa marcar como "Lendo" ou "Lido" para adicionar um sentimento.', 'Fechar', { duration: 4000 });
+      this.snackBar.open('Você precisa marcar como "Lendo" ou "Lido" para adicionar um sentimento.', 'Fechar', {duration: 4000});
       return;
     }
 
+    const oldSentiment = book.sentiment;
     const sentimentToSend = (book.sentiment === newSentiment) ? null : newSentiment;
 
     const dto: BookStatusSentimentDTO = {
@@ -305,16 +321,33 @@ export class FeedComponent implements OnInit {
 
     this.bookService.updateBookStatus(book.id, dto).subscribe({
       next: (response) => {
+        const newCounts = {...book.sentimentCounts};
+
+        if (oldSentiment && oldSentiment !== response.sentiment) {
+          if (newCounts[oldSentiment!]) {
+            newCounts[oldSentiment!] = (newCounts[oldSentiment!] || 1) - 1;
+          }
+        }
+
+        if (response.sentiment && oldSentiment !== response.sentiment) {
+          newCounts[response.sentiment] = (newCounts[response.sentiment] || 0) + 1;
+        }
+
         this.feedItems.update(items =>
           items.map(item =>
             item.id === book.id
-              ? { ...item, status: response.status, sentiment: response.sentiment }
+              ? {
+                ...item,
+                status: response.status,
+                sentiment: response.sentiment,
+                sentimentCounts: newCounts
+              }
               : item
           )
         );
-        this.snackBar.open('Sentimento atualizado!', 'Fechar', { duration: 2000 });
+        this.snackBar.open('Sentimento atualizado!', 'Fechar', {duration: 2000});
       },
-      error: () => this.snackBar.open('Erro ao atualizar sentimento.', 'Fechar', { duration: 3000 })
+      error: () => this.snackBar.open('Erro ao atualizar sentimento.', 'Fechar', {duration: 3000})
     });
   }
 }
